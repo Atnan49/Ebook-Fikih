@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Book Fikih Interaktif</title>
+    <!-- Google Fonts: Inter (Latin) & Amiri (Arabic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Link CSS Utama -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-pattern">
+
+    <!-- 
+      ======================================================
+      [JOB: Atnan] E-Book Page & Flipbook Layout
+      ======================================================
+      Tugas Rifki:
+      1. Buat toolbar aksesibilitas UDL di bagian atas flipbook:
+         - Tombol Font Dyslexia (Standard <-> Dyslexia)
+         - Tombol Ukuran Teks (A- / A+)
+         - Tombol Suara TTS (🔊 / 🔇)
+         - Tombol Daftar Isi (☰) untuk membuka sidebar panel.
+      2. Buat container utama untuk merender slide aktif secara dinamis menggunakan JS.
+      3. Rancang navigasi slide di bawah container:
+         - Tombol Sebelumnya (Prev) & Tombol Selanjutnya (Next)
+         - Indikator Dots untuk tiap slide
+         - Progress Bar penanda posisi baca
+      4. Buat layout sidebar untuk Daftar Isi yang bisa slide-in dari kiri atau kanan saat tombol ☰ diklik.
+      5. Hubungkan halaman ini dengan `js/data.js` dan `js/app.js` untuk merender konten slide secara dinamis.
+    -->
+
+    <!-- UDL Accessbility Toolbar -->
+    <div id="udl-toolbar" class="toolbar-container">
+        <!-- Tombol A+, A-, Dyslexia Toggle, TTS Speaker Toggle, Daftar Isi Button -->
+    </div>
+
+    <!-- Main Container Flipbook -->
+    <main class="ebook-container">
+        <!-- Sidebar Daftar Isi (TOC) -->
+        <aside id="sidebar-toc" class="sidebar">
+            <button id="close-sidebar">&times; Tutup</button>
+            <ul id="toc-list">
+                <!-- Daftar isi diisi otomatis dari JS -->
+            </ul>
+        </aside>
+
+        <!-- Slide Card -->
+        <div id="slide-card" class="glass-card-strong slide-card-container">
+            <!-- Konten slide dimuat dinamis dari data.js -->
+            <!-- Teks Arab harus menggunakan tag khusus dengan class "arabic-text" -->
+        </div>
+
+        <!-- Slide Navigation Controls -->
+        <div class="nav-controls">
+            <!-- Prev, Next, Dots, Progress Bar -->
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
