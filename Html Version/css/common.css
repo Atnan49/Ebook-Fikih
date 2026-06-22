@@ -106,13 +106,7 @@ body {
 }
 
 /* ===== Accessibility Font Zoom Helpers ===== */
-.font-scale-100 { font-size: 100%; }
-.font-scale-110 { font-size: 110%; }
-.font-scale-120 { font-size: 120%; }
-.font-scale-130 { font-size: 130%; }
-.font-scale-140 { font-size: 140%; }
-.font-scale-150 { font-size: 150%; }
-.font-scale-160 { font-size: 160%; }
+/* (Hanya melakukan zoom untuk isi card materi di ebook saja, root font size tetap normal) */
 
 /* Zoom khusus untuk slide card di ebook */
 .font-scale-100 .slide-card-container { font-size: 100% !important; }

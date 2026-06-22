@@ -216,17 +216,6 @@
             if (savedDyslexia === 'true') {
                 document.body.classList.add('dyslexia-mode');
             }
-
-            const savedFontScale = localStorage.getItem('fontScale');
-            if (savedFontScale) {
-                // Hapus class font scale sebelumnya
-                document.body.classList.forEach(className => {
-                    if (className.startsWith('font-scale-')) {
-                        document.body.classList.remove(className);
-                    }
-                });
-                document.body.classList.add(`font-scale-${savedFontScale}`);
-            }
         });
     </script>
 </body>
