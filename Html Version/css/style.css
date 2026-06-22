@@ -1016,15 +1016,30 @@ body.dyslexia-mode .arabic-text {
   right: 0;
   top: 100%;
   margin-top: 0.5rem;
-  width: 13rem;
-  padding: 1rem;
+  width: 14rem;
+  padding: 1.25rem;
   border-radius: var(--radius-2xl);
-  z-index: 100;
-  border: 2.5px solid var(--color-blue-200);
+  z-index: 101; /* elevated above backdrop */
+  border: 2.5px solid var(--color-blue-200) !important;
+  background: #ffffff !important; /* solid white to prevent background text bleeding through */
+  box-shadow: var(--shadow-elevated) !important;
+  transform-origin: top right;
 }
 
 .settings-dropdown.active {
   display: block;
+  animation: popoverShow 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes popoverShow {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .settings-dropdown-header {
