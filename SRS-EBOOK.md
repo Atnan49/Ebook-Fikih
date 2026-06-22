@@ -14,7 +14,7 @@ Media pembelajaran ini mengimplementasikan prinsip UDL tingkat **Standard**, yai
 Fitur UDL utama yang wajib tersedia:
 1. **Dyslexia Mode**: Opsi untuk mengubah jenis font latin menjadi *OpenDyslexic* secara global.
 2. **Text Zoom**: Skalabilitas ukuran teks dari 100% hingga 160% tanpa merusak tata letak (responsive layout).
-3. **Text-to-Speech (TTS)**: Pembacaan audio otomatis/manual untuk setiap slide dengan suara berbahasa Indonesia.
+3. **Text-to-Speech (TTS)**: Pembacaan audio otomatis/manual untuk setiap slide dengan suara berbahasa Indonesia menggunakan Web Speech API (`SpeechSynthesis`).
 4. **Desain Ramah Sensorik**: Palet warna kontras tinggi namun lembut di mata (Biru & Krem), menjauhi warna gelap yang melelahkan mata anak-anak.
 
 ---
@@ -67,6 +67,8 @@ Html Version/
   * **Tombol Suara (🔊 / 🔇)**: Toggle untuk menyalakan/mematikan Text-to-Speech (TTS).
   * **Tombol Font Disleksia (Standard ↔ Disleksia)**: Mengubah font secara global menjadi OpenDyslexic dengan menambahkan class `dyslexia-mode` pada tag `<body>`.
   * **Tombol Menu (☰)**: Membuka sidebar panel Daftar Isi (Table of Contents).
+* **Chapter Cover Slides (Slide Awal Bab)**:
+  * Di setiap awal Bab (Bab I & Bab II), terdapat slide pengantar/cover khusus dengan tampilan kartu bergradasi premium biru gelap (`from-blue-700 via-blue-600 to-blue-500`) dan teks putih berukuran besar secara statis (tanpa animasi internal yang mengganggu seperti float/shimmer) sebelum masuk ke materi pembelajaran.
 * **Flipbook Card**:
   * Merender konten dari `data.js` secara dinamis sesuai indeks slide aktif.
   * Mendukung pembacaan jenis konten:
@@ -81,24 +83,29 @@ Html Version/
   * Tombol **Sebelumnya (Prev)** dan **Berikutnya (Next)**.
   * Dot Indicators di bagian bawah flipbook yang aktif sesuai slide saat ini.
   * Progress Bar horizontal penunjuk persentase penyelesaian membaca.
-  * Dukungan kontrol tombol keyboard (Panah Kiri untuk Prev, Panah Kanan untuk Next).
+  * Dukungan kontrol tombol keyboard (Panah Kiri untuk Prev, Panah Kanan untuk Next, Space untuk Next).
   * Dukungan swipe gesture pada layar sentuh (mobile).
+* **Ajakan Kuis Akhir**:
+  * Di bagian akhir e-book (slide terakhir), terdapat kartu ajakan kuis interaktif berlatar krim lembut statis dengan teks *"Sudah siap ngerjain kuis?"* dan tombol *"Mulai Kuis Sekarang! 🚀"* yang mengarah ke `kuis.html`.
+  * Tombol navigasi "Berikutnya" di bilah navigasi bawah otomatis berubah menjadi tombol **Mulai Kuis ✏️** (mengarah ke `kuis.html`) saat berada di halaman terakhir.
 
 ### 3.3 Halaman Kuis (`kuis.html`, `js/quiz.js`) - [Developer: Narendra]
 * **Sistem Navigasi Tab**:
   * **Tab Pilihan Ganda**:
-    * Merender 10 pertanyaan PG secara dinamis dari `data.js`.
+    * Merender pertanyaan PG secara dinamis dari `data.js`.
     * Setiap soal memiliki 3 opsi pilihan (A, B, C).
     * Saat opsi diklik, berubah warna menjadi biru muda (state `.selected`).
     * Tombol **Kirim Jawaban**: Saat diklik, sistem akan mengunci opsi, mewarnai jawaban benar dengan warna hijau (`.correct`) dan jawaban salah dengan warna merah (`.wrong`), serta menghitung skor total.
-    * Menampilkan ulasan skor dengan emoji feedback yang sesuai (misal: 🌟 untuk skor 100, 👏 untuk skor >= 70, dan 💪 untuk skor < 70).
+    * Menampilkan ulasan skor dengan emoji feedback yang sesuai (misal: 🌟 untuk skor tinggi, 👏 untuk skor sedang, dan 💪 untuk skor rendah).
   * **Tab Soal Essay**:
-    * Merender 5 pertanyaan essay secara dinamis.
+    * Merender pertanyaan essay secara dinamis.
     * Menyediakan kolom input teks (`textarea`) untuk diisi mandiri oleh siswa.
     * Tombol **Lihat Kunci Jawaban**: Saat diklik, menampilkan kunci jawaban resmi di bawah kolom input untuk evaluasi mandiri.
   * **Tab Tugas Praktik**:
     * Menampilkan panduan instruksi tugas praktik wudhu/tayamum.
     * Tombol **Kirim Video via WhatsApp**: Membuat link dinamis WhatsApp yang langsung mengarah ke nomor guru dengan template pesan tugas yang otomatis ter-encode.
+* **Gaya Animasi Halus & Tenang**:
+  * Seluruh komponen kuis (soal, opsi, dan kunci jawaban) tetap menggunakan animasi masuk yang mulus (`animate-fade-in-up` / `animate-fade-in`), tetapi menonaktifkan seluruh efek memantul (`animate-bounce-in`) agar transisi terasa lebih halus dan tidak melelahkan mata anak-anak.
 
 ---
 
@@ -111,7 +118,7 @@ Palet warna yang dikonfigurasi dalam `css/style.css` harus dipatuhi secara konsi
 * **Elemen Interaktif (Secondary)**: Krem-Emas (`#EDDBB3` ke `#E0C990`).
 * **Warna Teks Utama**: Navy Gelap (`#0F2940`).
 * **Warna Status**: Hijau (`#4CAF50`), Merah (`#EF5350`), Emas (`#D4A843`).
-* **Efek Glassmorphism**: Gunakan `background: rgba(255, 255, 255, 0.75)` dengan kombinasi `backdrop-filter: blur(20px)` untuk seluruh panel kartu utama.
+* **Efek Glassmorphism**: Gunakan `background: rgba(255, 255, 255, 0.7)` dengan kombinasi `backdrop-filter: blur(20px)` untuk seluruh panel kartu utama.
 
 ### 4.2 Kinerja & Kecepatan Akses
 * Aset gambar (`.png`) harus dioptimalkan ukurannya (di bawah 100KB per gambar jika memungkinkan) untuk menghindari loading lambat pada koneksi internet HP 3G/4G sekolah.
