@@ -12,9 +12,28 @@ const slides = [
   {
     id: 1,
     bab: 1,
+    subBab: "Pendahuluan",
+    title: "BAB I: THAHARAH (BERSUCI)",
+    image: "images/wudhu-illustration.png",
+    isCover: true,
+    content: [
+      {
+        type: "heading",
+        content: "Mari Belajar Bersuci ✨"
+      },
+      {
+        type: "text",
+        content: "Pada bab ini, kita akan belajar cara bersuci dari hadas dan najis agar badan kita selalu bersih, sehat, dan ibadah kita diterima oleh Allah SWT."
+      }
+    ]
+  },
+  // Sub-Bab 1: Pengertian Thaharah
+  {
+    id: 2,
+    bab: 1,
     subBab: "Pengertian Thaharah",
     title: "Yuk Cuci Tangan!",
-    image: "public/images/muslim_child_wudhu.png",
+    image: "images/wudhu-illustration.png",
     content: [
       { type: "heading", content: "Kenapa Kita Harus Cuci Tangan?" },
       {
@@ -24,7 +43,7 @@ const slides = [
     ]
   },
   {
-    id: 2,
+    id: 3,
     bab: 1,
     subBab: "Pengertian Thaharah",
     title: "Apa Itu Thaharah?",
@@ -40,7 +59,7 @@ const slides = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     bab: 1,
     subBab: "Pengertian Thaharah",
     title: "Dalil Perintah Thaharah dari Al-Qur'an",
@@ -53,7 +72,7 @@ const slides = [
         content: "Pakaianmu, bersihkanlah! (4) Segala (perbuatan) yang keji, tinggalkanlah! (5) — QS. Al-Muddaṡṡir"
       },
       { type: "heading", content: "2. Surah Al-Baqarah Ayat 222" },
-      { type: "arabic", content: "إِنَّ اللهَ يُحِبُّ التَّوَّابِيْنَ وَيُحِبُ  المُتَطَهِّرِيْنَ" },
+      { type: "arabic", content: "إِنَّ اللهَ يُحِبُّ التَّوَّابِيْنَ وَيُحِبُّ المُتَطَهِّرِيْنَ" },
       { type: "transliteration", content: "Innallāha yuḥibbut-tawwābīna wa yuḥibbul-mutaṭahhirīn." },
       {
         type: "translation",
@@ -62,7 +81,7 @@ const slides = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     bab: 1,
     subBab: "Pengertian Thaharah",
     title: "Dalil Perintah Thaharah dari Hadis",
@@ -77,13 +96,13 @@ const slides = [
         type: "text",
         content: "Dalil-dalil tersebut mengajarkan kepada umat Islam untuk bersuci. Karena kesucian sebagian dari iman."
       },
-      { type: "arabic", content: "الطَّهُوْرُ شَطْرُ الإِيْمَانُ" },
+      { type: "arabic", content: "الطَّهُوْرُ شَطْرُ Edِيْمَانُ" },
       { type: "transliteration", content: "Aṭ-ṭahūru syaṭrul-īmān." },
       { type: "translation", content: "Kesucian sebagian dari iman. (H.R. Imam Muslim)" }
     ]
   },
   {
-    id: 5,
+    id: 6,
     bab: 1,
     subBab: "Pengertian Thaharah",
     title: "Alat untuk Thaharah (Air)",
@@ -104,7 +123,7 @@ const slides = [
     ]
   },
   {
-    id: 6,
+    id: 7,
     bab: 1,
     subBab: "Pengertian Thaharah",
     title: "Alat untuk Thaharah (Tanah & Batu)",
@@ -118,7 +137,7 @@ const slides = [
     ]
   },
   {
-    id: 7,
+    id: 8,
     bab: 1,
     subBab: "Pengertian Thaharah",
     title: "Manfaat Thaharah",
@@ -137,7 +156,7 @@ const slides = [
     ]
   },
   {
-    id: 8,
+    id: 9,
     bab: 1,
     subBab: "Bersuci dari Najis",
     title: "Bersuci dari Najis",
@@ -151,7 +170,7 @@ const slides = [
     ]
   },
   {
-    id: 9,
+    id: 10,
     bab: 1,
     subBab: "Bersuci dari Najis",
     title: "Jenis-Jenis Najis",
@@ -168,7 +187,7 @@ const slides = [
     ]
   },
   {
-    id: 10,
+    id: 11,
     bab: 1,
     subBab: "Bersuci dari Hadas",
     title: "Bersuci dari Hadas",
@@ -186,11 +205,11 @@ const slides = [
     ]
   },
   {
-    id: 11,
+    id: 12,
     bab: 1,
     subBab: "Bersuci dari Hadas",
     title: "Tata Cara Berwudhu",
-    image: "public/images/muslim_child_wudhu.png",
+    image: "images/wudhu-illustration.png",
     content: [
       { type: "heading", content: "Membersihkan Hadas Kecil" },
       {
@@ -208,7 +227,7 @@ const slides = [
     ]
   },
   {
-    id: 12,
+    id: 13,
     bab: 1,
     subBab: "Bersuci dari Hadas",
     title: "Tata Cara Tayamum",
@@ -227,7 +246,7 @@ const slides = [
     ]
   },
   {
-    id: 13,
+    id: 14,
     bab: 1,
     subBab: "Bersuci dari Hadas",
     title: "Mandi Wajib",
@@ -249,7 +268,7 @@ const slides = [
     ]
   },
   {
-    id: 14,
+    id: 15,
     bab: 1,
     subBab: "Istinja'",
     title: "Istinja'",
@@ -271,11 +290,29 @@ const slides = [
   },
   // ========== BAB II: KETENTUAN ADZAN DAN IQAMAH ==========
   {
-    id: 15,
+    id: 16,
+    bab: 2,
+    subBab: "Pendahuluan",
+    title: "BAB II: KETENTUAN ADZAN DAN IQAMAH",
+    image: "images/mosque-illustration.png",
+    isCover: true,
+    content: [
+      {
+        type: "heading",
+        content: "Panggilan Shalat yang Mulia 🕌"
+      },
+      {
+        type: "text",
+        content: "Pada bab ini, kita akan belajar tentang adzan dan iqamah sebagai penanda masuknya waktu shalat dan seruan untuk mendirikannya."
+      }
+    ]
+  },
+  {
+    id: 17,
     bab: 2,
     subBab: "Adzan",
     title: "Apakah Kamu Mendengar Adzan?",
-    image: "public/images/mosque_adzan.png",
+    image: "images/mosque-illustration.png",
     content: [
       { type: "heading", content: "Kapan kamu mendengar adzan?" },
       { type: "text", content: "Ketika masuk waktu shalat." },
@@ -283,7 +320,7 @@ const slides = [
     ]
   },
   {
-    id: 16,
+    id: 18,
     bab: 2,
     subBab: "Adzan",
     title: "Adzan",
@@ -301,7 +338,7 @@ const slides = [
     ]
   },
   {
-    id: 17,
+    id: 19,
     bab: 2,
     subBab: "Adzan",
     title: "Asal Mula Adzan",
@@ -312,7 +349,7 @@ const slides = [
     ]
   },
   {
-    id: 18,
+    id: 20,
     bab: 2,
     subBab: "Adzan",
     title: "Syarat Sah Adzan & Muadzin",
@@ -342,7 +379,7 @@ const slides = [
     ]
   },
   {
-    id: 19,
+    id: 21,
     bab: 2,
     subBab: "Adzan",
     title: "Adab Ketika Azan",
@@ -363,7 +400,7 @@ const slides = [
     ]
   },
   {
-    id: 20,
+    id: 22,
     bab: 2,
     subBab: "Adzan",
     title: "Lafaz Adzan",
@@ -376,7 +413,7 @@ const slides = [
           "أَشْهَدُ أَنْ لاَ إِلٰهَ إِلَّا اللهُ — Asyhadu an lā ilāha illallāh (2x)",
           "أَشْهَدُ أَنَّ مُحَمَّدًا رَسُوْلُ اللهِ — Asyhadu anna Muḥammadan rasūlullāh (2x)",
           "حَيَّ عَلَى الصَّلاَةِ — Ḥayya 'alaṣ-ṣalāh (2x)",
-          "حَيَّ عَلَى الْفَLAَحِ — Ḥayya 'alal-falāḥ (2x)",
+          "حَيَّ عَلَى الْفَلَاحِ — Ḥayya 'alal-falāḥ (2x)",
           "اللهُ أَكْبَرُ اللهُ أَكْبَرُ — Allāhu Akbar Allāhu Akbar",
           "لاَ إِلٰهَ إِلَّا اللهُ — Lā ilāha illallāh"
         ]
@@ -384,7 +421,7 @@ const slides = [
     ]
   },
   {
-    id: 21,
+    id: 23,
     bab: 2,
     subBab: "Adzan",
     title: "Menjawab Kumandang Adzan",
@@ -395,12 +432,12 @@ const slides = [
     ]
   },
   {
-    id: 22,
+    id: 24,
     bab: 2,
     subBab: "Iqamah",
     title: "Mengenal Iqamah",
     content: [
-      { type: "text", content: "Iqamah artinya menegakkan, yaitu tanda segera mendirikan shalat. Iqamah dikumandangkan setelah adzan, saat imam dan jamaah sudah siap berdiri untuk shalat." },
+      { type: "text", content: "Iqamah artinya menegakkan, yaitu tanda segera mendirikan shalat. Iqamah dikumandangkan setelah adzan, saat imam and jamaah sudah siap berdiri untuk shalat." },
       { type: "heading", content: "Perbedaan Lafaz Iqamah dengan Adzan" },
       {
         type: "list",
@@ -413,7 +450,7 @@ const slides = [
     ]
   },
   {
-    id: 23,
+    id: 25,
     bab: 2,
     subBab: "Iqamah",
     title: "Keutamaan Azan & Iqamah",
@@ -431,13 +468,13 @@ const babInfo = [
     bab: 1,
     title: "Thaharah",
     description: "Bersuci — Pengertian, Dalil, Alat, Wudhu, Tayamum, Mandi Wajib, Istinja'",
-    slideRange: [1, 14]
+    slideRange: [1, 15]
   },
   {
     bab: 2,
     title: "Ketentuan Adzan dan Iqamah",
     description: "Pengertian, Sejarah, Syarat, Adab, Lafaz, Iqamah",
-    slideRange: [15, 23]
+    slideRange: [16, 25]
   }
 ];
 
