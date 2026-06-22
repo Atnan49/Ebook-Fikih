@@ -1,0 +1,944 @@
+/* ==========================================================================
+   E-Book Flipbook Reader Page Styles (ebook.css)
+   ========================================================================== */
+
+.ebook-container {
+  display: flex;
+  position: relative;
+  max-width: 800px;
+  width: 95%;
+  margin: 1.5rem auto;
+  gap: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 auto;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ===== Toolbar Container & Items ===== */
+.toolbar-container {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-soft);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.toolbar-inner {
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ===== Ebook Specific Buttons ===== */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-blue-400) 0%, var(--color-blue-600) 100%);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-xl);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s var(--ease-spring);
+  box-shadow: 0 4px 15px rgba(91, 155, 213, 0.3);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(91, 155, 213, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-cream {
+  background: linear-gradient(135deg, var(--color-cream-100) 0%, var(--color-cream-200) 100%);
+  color: var(--color-blue-800);
+  border: 1px solid var(--color-cream-300);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-xl);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s var(--ease-spring);
+  box-shadow: 0 4px 15px rgba(245, 230, 202, 0.4);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.btn-cream:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(245, 230, 202, 0.6);
+  background: linear-gradient(135deg, var(--color-cream-200) 0%, var(--color-cream-300) 100%);
+}
+
+.btn-cream:disabled, .btn-primary:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Specific Toolbar Buttons */
+.btn-tool {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  background: var(--color-cream-100);
+  border: 1px solid var(--color-cream-200);
+  color: var(--color-blue-700);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.875rem;
+}
+
+.btn-tool:hover {
+  background: var(--color-cream-200);
+  transform: scale(1.05);
+}
+
+.btn-tool.active {
+  background: var(--color-blue-500);
+  color: white;
+  border-color: var(--color-blue-600);
+  box-shadow: var(--shadow-glow);
+}
+
+.font-scale-value {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--color-blue-600);
+  width: 2.2rem;
+  text-align: center;
+  font-family: monospace;
+}
+
+/* Divider */
+.toolbar-divider {
+  width: 1px;
+  height: 1.5rem;
+  background: rgba(91, 155, 213, 0.2);
+  margin: 0 0.25rem;
+}
+
+/* ===== Progress Bar & Indicator Row ===== */
+.progress-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progress-bar-bg {
+  flex-grow: 1;
+  height: 0.375rem;
+  background: var(--color-cream-200);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--color-blue-400), var(--color-blue-600));
+  width: 0%;
+  border-radius: 9999px;
+  transition: width 0.4s ease-out;
+}
+
+.progress-text {
+  font-size: 0.75rem;
+  color: var(--color-blue-500);
+  font-family: monospace;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* ===== Slide Card Container ===== */
+.slide-card-container {
+  width: 100%;
+  border-radius: var(--radius-2xl);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 320px;
+}
+
+@media(min-width: 640px) {
+  .slide-card-container {
+    border-radius: var(--radius-3xl);
+    padding: 2rem;
+  }
+}
+
+/* Bab Indicator Pill */
+.bab-pill-container {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.bab-pill {
+  display: inline-block;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(232, 244, 253, 0.8);
+  border: 1px solid rgba(91, 155, 213, 0.2);
+  color: var(--color-blue-600);
+  font-size: 0.75em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+/* Standard slide headings/text inside card */
+.slide-title {
+  font-size: 1.25em;
+  font-weight: 800;
+  color: var(--color-blue-900);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(245, 230, 202, 0.8);
+}
+
+@media(min-width: 640px) {
+  .slide-title {
+    font-size: 1.5em;
+  }
+}
+
+.slide-image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.slide-img {
+  border-radius: var(--radius-xl);
+  max-width: 160px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(91, 155, 213, 0.15));
+}
+
+@media(min-width: 640px) {
+  .slide-img {
+    max-width: 180px;
+  }
+}
+
+/* UDL content block styling inside cards */
+.block-heading {
+  font-size: 1.125em;
+  font-weight: 700;
+  color: var(--color-blue-800);
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.block-text {
+  color: rgba(22, 59, 96, 0.85);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.block-transliteration {
+  text-align: center;
+  color: var(--color-blue-600);
+  font-style: italic;
+  font-size: 0.95em;
+  margin-bottom: 0.25rem;
+  line-height: 1.5;
+}
+
+.block-translation {
+  text-align: center;
+  color: rgba(30, 79, 128, 0.7);
+  font-size: 0.9em;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+  line-height: 1.5;
+}
+
+.block-note {
+  background: linear-gradient(to right, var(--color-cream-50), var(--color-cream-200));
+  border-left: 4px solid var(--color-gold-400);
+  border-top-right-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem 0;
+  font-size: 0.875em;
+  color: var(--color-blue-800);
+  box-shadow: var(--shadow-soft);
+}
+
+.block-list-container {
+  margin: 0.75rem 0;
+}
+
+.block-list-title {
+  font-weight: 700;
+  color: var(--color-blue-700);
+  margin-bottom: 0.5rem;
+  font-size: 0.95em;
+}
+
+.block-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.block-list-item {
+  display: flex;
+  align-items: start;
+  gap: 0.5rem;
+  color: rgba(22, 59, 96, 0.85);
+  line-height: 1.6;
+}
+
+.list-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  background: var(--color-blue-50);
+  color: var(--color-blue-600);
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+/* ===== Chapter Cover Slide Styling (Gradasi Premium) ===== */
+.slide-card-container.cover-slide {
+  background: linear-gradient(135deg, var(--color-blue-700) 0%, var(--color-blue-600) 50%, var(--color-blue-500) 100%) !important;
+  color: white !important;
+  border: 3.5px solid rgba(255, 255, 255, 0.75) !important;
+  text-align: center;
+  box-shadow: var(--shadow-elevated) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 420px;
+}
+
+.cover-slide .bab-pill {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.cover-slide .slide-title {
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cover-slide .slide-image-wrapper .relative-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto;
+}
+
+.cover-slide .slide-img {
+  width: 180px;
+  height: auto;
+  border-radius: var(--radius-xl);
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+}
+
+@media(min-width: 640px) {
+  .cover-slide .slide-img {
+    width: 210px;
+  }
+}
+
+.cover-slide .block-heading {
+  color: white;
+}
+
+.cover-slide .block-text {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  max-width: 450px;
+  margin: 0 auto 0.75rem auto;
+}
+
+.cover-slide .cover-footer-text {
+  padding-top: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75em;
+  font-weight: 600;
+}
+
+/* ===== Sticky Navigation Bar at Bottom ===== */
+.sticky-nav {
+  position: sticky;
+  bottom: 0;
+  z-index: 40;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 -2px 15px rgba(91, 155, 213, 0.08);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.nav-inner {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.dots-container {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+@media(min-width: 640px) {
+  .dots-container {
+    display: flex;
+  }
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-blue-200);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dot:hover {
+  background: var(--color-blue-300);
+}
+
+.dot.active {
+  background: var(--color-blue-500);
+  width: 1.5rem;
+}
+
+.mobile-page-pill {
+  display: flex;
+  align-items: center;
+  background: rgba(91, 155, 213, 0.12);
+  color: var(--color-blue-800);
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+}
+
+@media(min-width: 640px) {
+  .mobile-page-pill {
+    display: none;
+  }
+}
+
+/* ===== Quiz CTA Card (Akhir E-book) ===== */
+.quiz-cta-card {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--color-cream-100) 0%, var(--color-cream-50) 50%, #fffbe6 100%);
+  border: 3.5px solid var(--color-cream-300);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+
+.quiz-cta-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.quiz-cta-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-blue-900);
+  margin-bottom: 0.5rem;
+}
+
+.quiz-cta-description {
+  font-size: 0.875rem;
+  color: var(--color-blue-800);
+  opacity: 0.8;
+  max-width: 400px;
+  margin: 0 auto 1.25rem auto;
+  line-height: 1.6;
+}
+
+/* ===== Sidebar Daftar Isi (TOC) ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 290px;
+  height: 100vh;
+  background: white;
+  z-index: 1000;
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+@media(min-width: 640px) {
+  .sidebar {
+    width: 320px;
+    right: -350px;
+  }
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 41, 64, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  display: none;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+.sidebar-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--color-cream-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-cream-50);
+}
+
+.sidebar-title {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--color-blue-900);
+}
+
+#close-sidebar {
+  background: var(--color-cream-100);
+  border: 1px solid var(--color-cream-200);
+  color: var(--color-blue-700);
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+}
+
+#close-sidebar:hover {
+  background: var(--color-cream-200);
+}
+
+.sidebar-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.toc-bab-section {
+  margin-bottom: 1.25rem;
+}
+
+.toc-bab-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--color-blue-700);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px dashed rgba(91, 155, 213, 0.3);
+  padding-bottom: 0.25rem;
+}
+
+.toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.toc-btn {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-blue-800);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.toc-btn:hover {
+  background: var(--color-cream-100);
+  color: var(--color-blue-900);
+}
+
+.toc-btn.active {
+  background: var(--color-blue-50);
+  color: var(--color-blue-800);
+  font-weight: 700;
+}
+
+.toc-num {
+  color: var(--color-blue-300);
+  margin-right: 0.5rem;
+  font-weight: 700;
+}
+
+.toc-btn.active .toc-num {
+  color: var(--color-blue-500);
+}
+
+/* ===== TTS Active Bar ===== */
+.tts-status-bar {
+  background: var(--color-blue-500);
+  color: white;
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 0.4rem;
+  font-weight: bold;
+  position: relative;
+  z-index: 49;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.tts-status-bar .btn-tts-stop {
+  text-decoration: underline;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* ===== Arabic text inside blocks ===== */
+.block-arabic {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  font-size: 1.5em;
+  line-height: 2.2;
+  color: var(--color-blue-800);
+  text-align: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-xl);
+  background: rgba(235, 245, 255, 0.4);
+  border: 1px solid rgba(22, 59, 96, 0.08);
+  margin: 0.75rem 0;
+}
+
+/* ===== Footer inside Card ===== */
+.ebook-footer {
+  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.ebook-footer-card {
+  padding: 1.25rem;
+  border-radius: var(--radius-xl);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.ebook-footer-quote {
+  font-size: 0.85rem;
+  color: var(--color-blue-700);
+  font-style: italic;
+}
+
+.ebook-footer-divider {
+  width: 3rem;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--color-blue-300), transparent);
+  margin: 0.5rem auto;
+}
+
+.ebook-footer-copyright {
+  font-size: 0.7rem;
+  color: rgba(30, 79, 128, 0.4);
+}
+
+/* ===== Premium UI Layout Alignments & Back Links ===== */
+
+/* ===== Desktop Controls vs Mobile controls ===== */
+.desktop-controls {
+  display: none;
+}
+
+@media(min-width: 640px) {
+  .desktop-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.mobile-controls {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+@media(min-width: 640px) {
+  .mobile-controls {
+    display: none;
+  }
+}
+
+/* Settings Dropdown Popover on Mobile */
+.settings-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.5rem;
+  width: 14rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-2xl);
+  z-index: 101; /* elevated above backdrop */
+  border: 2.5px solid var(--color-blue-200) !important;
+  background: #ffffff !important; /* solid white to prevent background text bleeding through */
+  box-shadow: var(--shadow-elevated) !important;
+  transform-origin: top right;
+}
+
+.settings-dropdown.active {
+  display: block;
+  animation: popoverShow 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.settings-dropdown-header {
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: var(--color-blue-900);
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-cream-200);
+  padding-bottom: 0.375rem;
+  user-select: none;
+}
+
+.settings-label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-blue-500);
+  display: block;
+  margin-bottom: 0.25rem;
+  user-select: none;
+}
+
+.settings-row {
+  margin-bottom: 0.75rem;
+}
+
+/* Switch styling for Toggle */
+.switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-top: 1px solid rgba(245, 230, 202, 0.5);
+  padding-top: 0.75rem;
+}
+
+.switch-label-group {
+  user-select: none;
+}
+
+.switch-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-blue-800);
+  display: block;
+}
+
+.switch-sublabel {
+  font-size: 0.55rem;
+  color: var(--color-blue-500);
+  display: block;
+  line-height: 1.2;
+}
+
+.switch-btn {
+  width: 2.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  background: var(--color-blue-200);
+  border: none;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+
+.switch-btn.active {
+  background: var(--color-blue-500);
+}
+
+.switch-circle {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  background: white;
+  position: absolute;
+  top: 0.125rem;
+  left: 0.125rem;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.switch-btn.active .switch-circle {
+  transform: translateX(1rem);
+}
+
+/* Settings Backdrop for closing popover */
+.settings-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  display: none;
+}
+
+.settings-backdrop.active {
+  display: block;
+}
+
+/* ===== Floating Background Shapes (WOW factor) ===== */
+.floating-shapes {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.shape-1 {
+  position: absolute;
+  top: -5rem;
+  right: -5rem;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 9999px;
+  background: rgba(144, 196, 232, 0.15);
+  animation: float 6s ease-in-out infinite;
+}
+
+.shape-2 {
+  position: absolute;
+  top: 33%;
+  left: -4rem;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 9999px;
+  background: rgba(237, 219, 179, 0.25);
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.shape-3 {
+  position: absolute;
+  bottom: 5rem;
+  right: 2.5rem;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 9999px;
+  background: rgba(197, 226, 246, 0.2);
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* ===== Responsive Helpers ===== */
+.hidden-xs {
+  display: none !important;
+}
+.visible-xs {
+  display: inline-flex !important;
+}
+
+@media(min-width: 640px) {
+  .hidden-xs {
+    display: inline-flex !important;
+  }
+  .visible-xs {
+    display: none !important;
+  }
+}

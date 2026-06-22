@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Link CSS Utama -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/kuis.css">
 </head>
 <body class="bg-pattern">
 
@@ -38,7 +39,14 @@
       6. Hubungkan halaman ini dengan `js/data.js` dan `js/quiz.js` untuk memproses logika kuisnya.
     -->
 
-    <header class="container">
+    <header class="container" style="position: relative; padding-top: 4rem;">
+        <!-- Back Link Chevron -->
+        <a href="index.html" class="back-link" style="position: absolute; top: 1.5rem; left: 1rem;" title="Kembali ke Beranda">
+            <svg class="chevron-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>Beranda</span>
+        </a>
         <h1>Kuis Fikih Interaktif ✏️</h1>
         <p>Ayo uji pemahamanmu setelah membaca E-Book!</p>
     </header>
