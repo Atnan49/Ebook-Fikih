@@ -33,34 +33,179 @@
       5. Pastikan halaman ini responsif, bersih, dan menggunakan layout modern (flexbox/grid).
     -->
 
-    <header class="container">
-        <!-- Taruh navigasi atau judul di sini -->
+    <header class="container animate-fade-in">
+        <nav class="navbar glass-card">
+            <a href="index.html" class="navbar-brand">
+                <span>📚 Smart E-Book Fikih</span>
+            </a>
+            <ul class="navbar-nav">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="#synopsis">Sinopsis</a></li>
+                <li><a href="ebook.html">Baca E-Book</a></li>
+                <li><a href="kuis.html">Mulai Kuis</a></li>
+                <li><a href="#contact">Hubungi Kami</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main class="container">
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
-            <!-- Isi hero: judul, subjudul, ilustrasi, tombol menu -->
+            <div class="hero-content animate-fade-in-up">
+                <span class="hero-badge">Media Pembelajaran Fikih Interaktif</span>
+                <h1 class="hero-title">Smart E-Book Digital <br><span>Fikih Kelas 2 SD</span></h1>
+                <p class="hero-subtitle">
+                    Pembelajaran Fikih yang Inklusif & Interaktif berbasis prinsip UDL (Universal Design for Learning). Belajar Thaharah dan Ketentuan Adzan/Iqamah dengan mudah dan menyenangkan!
+                </p>
+                <div class="hero-actions">
+                    <a href="ebook.html" class="btn btn-primary animate-pulse-glow">Mulai Membaca 📖</a>
+                    <a href="kuis.html" class="btn btn-secondary">Coba Kuis ✏️</a>
+                </div>
+            </div>
+            <div class="hero-image-container animate-float">
+                <div class="hero-decor-1"></div>
+                <img src="public/images/muslim_children_reading.png" alt="Anak-anak belajar membaca">
+                <div class="hero-decor-2"></div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu" class="menu-section">
+            <h2 class="section-title">Ayo Mulai <span>Belajar!</span></h2>
+            <div class="menu-grid">
+                <!-- Ebook Link Card -->
+                <a href="ebook.html" class="menu-card glass-card-strong animate-fade-in-up">
+                    <div class="menu-card-icon">📖</div>
+                    <h3 class="menu-card-title">E-Book Interaktif</h3>
+                    <p class="menu-card-desc">
+                        Baca materi Fikih interaktif dengan fitur pembaca suara otomatis (TTS) dan opsi font khusus ramah disleksia.
+                    </p>
+                </a>
+                
+                <!-- Quiz Link Card -->
+                <a href="kuis.html" class="menu-card glass-card-strong animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="menu-card-icon">✏️</div>
+                    <h3 class="menu-card-title">Kuis Evaluasi</h3>
+                    <p class="menu-card-desc">
+                        Uji pemahamanmu setelah membaca dengan kuis Pilihan Ganda, Soal Essay mandiri, dan Tugas Praktik langsung!
+                    </p>
+                </a>
+
+                <!-- Whatsapp Contact Card -->
+                <a href="https://wa.me/6288989320145?text=Assalamu%27alaikum%20Pak%20Guru%2C%20saya%20ingin%20bertanya%20tentang%20materi%20Fikih..." target="_blank" class="menu-card glass-card-strong animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="menu-card-icon">💬</div>
+                    <h3 class="menu-card-title">Tanya Pak Guru</h3>
+                    <p class="menu-card-desc">
+                        Punya kesulitan memahami materi? Tanyakan langsung ke Pak Guru via chat WhatsApp ramah anak.
+                    </p>
+                </a>
+            </div>
         </section>
 
         <!-- Sinopsis Section -->
-        <section id="synopsis" class="glass-card">
-            <!-- Isi sinopsis -->
+        <section id="synopsis" class="synopsis-section">
+            <div class="synopsis-grid">
+                <div class="synopsis-content glass-card-strong animate-fade-in-up">
+                    <h2 class="synopsis-title">Materi Yang Dipelajari</h2>
+                    <p class="synopsis-text">
+                        Smart E-Book ini dirancang khusus untuk memenuhi kebutuhan belajar siswa kelas 2 SD Semester 1 dengan membagi materi ke dalam dua bab penting:
+                    </p>
+                    <div class="synopsis-chapters">
+                        <div class="chapter-item">
+                            <div class="chapter-number">1</div>
+                            <div class="chapter-info">
+                                <h4>Bab I: Thaharah (Bersuci)</h4>
+                                <p>Mempelajari arti bersuci, dalil thaharah, pengenalan macam air (mutlak, suci tidak menyucikan, musyammas, mutanajis), jenis najis & hadas, cara berwudhu, tayamum, mandi wajib, dan tata cara istinja.</p>
+                            </div>
+                        </div>
+                        <div class="chapter-item">
+                            <div class="chapter-number">2</div>
+                            <div class="chapter-info">
+                                <h4>Bab II: Ketentuan Adzan & Iqamah</h4>
+                                <p>Mempelajari makna adzan dan iqamah, asal mula/sejarah seruan shalat, syarat sah muadzin, adab ketika adzan berkumandang, cara menjawab adzan, serta perbedaan lafaz adzan dan iqamah.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="synopsis-image-container animate-float">
+                    <img src="public/images/mosque_adzan.png" alt="Ilustrasi adzan di masjid">
+                </div>
+            </div>
         </section>
 
         <!-- Kontak Person Section -->
-        <section id="contact" class="glass-card">
-            <!-- Isi kontak -->
+        <section id="contact" class="contact-section glass-card-strong animate-fade-in-up">
+            <h2 class="synopsis-title">Hubungi Kami</h2>
+            <p class="synopsis-text" style="max-width: 600px; margin: 0 auto 2rem;">
+                Apabila ada kendala akses atau pertanyaan teknis mengenai media pembelajaran ini, silakan hubungi tim developer kami:
+            </p>
+            <div class="contact-grid">
+                <a href="https://wa.me/6288989320145?text=Assalamu%27alaikum%20tanya%20E-Book%20Fikih..." target="_blank" class="contact-btn contact-btn-wa" aria-label="WhatsApp Developer">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.012 2c-5.506 0-9.988 4.482-9.988 9.988 0 1.76.457 3.48 1.328 5L2 22l5.176-1.356c1.47.8 3.12 1.22 4.82 1.22h.004c5.505 0 9.986-4.482 9.986-9.988C22 6.482 17.518 2 12.012 2zm6.36 14.184c-.26.732-1.31 1.344-1.8 1.4-1.22.148-2.73-.294-4.88-1.206-2.766-1.164-4.526-3.956-4.66-4.14-.14-.186-1.12-1.494-1.12-2.85 0-1.356.706-2.02.96-2.29.26-.272.58-.342.78-.342h.56c.18 0 .42.068.66.626.24.58.82 2.02.9 2.18.08.16.14.34.02.56-.12.22-.24.364-.38.528-.14.164-.294.346-.12.646.3.52.926 1.54 1.746 2.27.84.75 1.548 1.05 1.888 1.19.34.14.54.116.74-.11.2-.23.86-1.002.98-1.344.12-.34.24-.29.42-.22.18.07 1.14.54 1.34.64.2.1.34.15.39.23.05.08.05.47-.21 1.202z"/>
+                    </svg>
+                </a>
+                <a href="mailto:atnanseptian1@gmail.com" class="contact-btn contact-btn-email" aria-label="Email Support">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="contact-btn contact-btn-ig" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+                    </svg>
+                </a>
+                <a href="https://t.me" target="_blank" class="contact-btn contact-btn-tg" aria-label="Telegram">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.56 8.61l-1.91 9c-.14.63-.51.79-1.04.49l-2.91-2.15-1.4 1.35c-.15.15-.28.27-.58.27l.2-2.94 5.35-4.83c.23-.21-.05-.32-.36-.12L8.27 13.5l-2.85-.89c-.62-.2-.63-.62.13-.91l11.13-4.29c.51-.19.96.11.88.7z"/>
+                    </svg>
+                </a>
+            </div>
         </section>
     </main>
 
     <footer>
+        <div class="footer-quote">
+            "Belajar Fikih jadi mudah, inklusif, dan menyenangkan bersama Smart E-Book!"
+        </div>
+        <div class="footer-divider"></div>
         <p>&copy; 2026 Smart E-Book Fikih Kelas 2 SD. Semua Hak Cipta Dilindungi.</p>
     </footer>
 
-    <!-- Script Opsional untuk Halaman Utama -->
+    <!-- Script Opsional & UDL Sync untuk Halaman Utama -->
     <script>
-        // Efek transisi masuk atau animasi interaktif sederhana
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sinkronisasi UDL preference secara global agar landing page menyesuaikan pilihan user
+            const savedDyslexia = localStorage.getItem('dyslexiaMode');
+            if (savedDyslexia === 'true') {
+                document.body.classList.add('dyslexia-mode');
+            }
+
+            const savedFontScale = localStorage.getItem('fontScale');
+            if (savedFontScale) {
+                // Hapus class font scale sebelumnya
+                document.body.classList.forEach(className => {
+                    if (className.startsWith('font-scale-')) {
+                        document.body.classList.remove(className);
+                    }
+                });
+                document.body.classList.add(`font-scale-${savedFontScale}`);
+            }
+
+            // Smooth scroll untuk link jangkar internal
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        targetEl.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
     </script>
 </body>
 
