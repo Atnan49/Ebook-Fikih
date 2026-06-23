@@ -543,18 +543,21 @@ footer p {
 }
 
 .cover-card {
-  padding: 1rem;
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.7);
+  /* ponytail: remove white/glass border and rounded corners */
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   box-shadow: var(--shadow-card);
-  border: 2px solid rgba(255, 255, 255, 0.6);
+  border: none;
   width: 100%;
 }
 
 .cover-image {
   width: 100%;
   height: auto;
-  border-radius: 20px;
+  border-radius: 0;
   display: block;
 }
 
