@@ -69,7 +69,7 @@ const slides = [
       { type: "transliteration", content: "Wa ṡiyābaka faṭahhir. War-rujza fahjur." },
       {
         type: "translation",
-        content: "Pakaianmu, bersihkanlah! (4) Segala (perbuatan) yang keji, tinggalkanlah! (5) — QS. Al-Muddaṡṡir"
+        content: "Pakaianmu, bersihkanlah! (4) Segala (perbuatan) yang keji, tinggalkanlah! (5) — QS. Al-Muddassir."
       },
       { type: "heading", content: "2. Surah Al-Baqarah Ayat 222" },
       { type: "arabic", content: "إِنَّ اللهَ يُحِبُّ التَّوَّابِيْنَ وَيُحِبُّ المُتَطَهِّرِيْنَ" },

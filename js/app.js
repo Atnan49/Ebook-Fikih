@@ -42,7 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let fontScale = 100; // range: 100 - 160
     let dyslexiaMode = false;
     let ttsEnabled = false;
-    let currentUtterance = null;
+    let currentUtterances = [];
+    let currentAudio = null;
+
+    // Pre-warm the TTS voices cache for faster language matching
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.getVoices();
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                window.speechSynthesis.getVoices();
+            };
+        }
+    }
 
     // ===== Read from localStorage =====
     function loadPreferences() {
@@ -389,51 +400,210 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Text-to-Speech (TTS) Logic =====
     let ttsTimeout = null;
 
+    // ── TTS Normalizer — Tambahkan di app.js sebelum speakCurrentSlide ──────
+    function stripArabicChars(text) {
+        // Hapus karakter Arab Unicode dari string manapun
+        return text.replace(/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]+/g, '')
+            .replace(/\s*—\s*/g, '. ') // "اللهُ — Allahu" → ". Allahu"
+            .replace(/\s{2,}/g, ' ').trim();
+    }
+
+    function stripDiacritics(text) {
+        // Hapus diakritik transliterasi Arab (ā→a, ī→i, ū→u, ṭ→t, ḥ→h, dll)
+        return text
+            .replace(/[āÃ]/g, 'a').replace(/[īÄ«]/g, 'i').replace(/[ūÅ«]/g, 'u')
+            .replace(/[ṭṬ]/g, 't').replace(/[ḥḤ]/g, 'h').replace(/[ṡṠ]/g, 's')
+            .replace(/[ṣṢ]/g, 's').replace(/[ḍḌ]/g, 'd').replace(/[żŻ]/g, 'z')
+            .replace(/ż/g, 'z');
+    }
+
+    function normalizeIslamicText(text) {
+        return text
+            // Hapus Arabic chars dulu (fix bug slide 22)
+            .replace(/[\u0600-\u06FF\u0750-\u077F]+/g, '')
+            .replace(/\s*—\s*/g, '. ')
+            // Expand H.R. references
+            .replace(/H\.R\.\s*/gi, 'Hadis Riwayat ')
+            .replace(/Hadist\s/gi, 'Hadis ')
+            .replace(/Muttafaqun\s*Alaihi/gi, 'Bukhari dan Muslim')
+            // Expand QS. references
+            .replace(/Q\.?S\.\s*/gi, 'Quran Surah ')
+            // Expand singkatan Islami
+            .replace(/\bSAW\.?\b/gi, 'shallallahu alaihi wasallam')
+            .replace(/\bSWT\.?\b/gi, 'subhanahu wataala')
+            .replace(/\bRA\.?\b/gi, 'radhiyallahu anhu')
+            // Hapus diakritik Arab di transliterasi
+            .replace(/[āÃ]/g, 'a').replace(/[īÄ«]/g, 'i').replace(/[ūÅ«]/g, 'u')
+            .replace(/[ṭṬḥḤṡṠṣṢ]/g, match => 'thhs'['ṭṬḥḤṡṠṣṢ'.indexOf(match)])
+            // Cleanup
+            .replace(/\s{2,}/g, ' ').trim();
+    }
+
+    function getVoiceForLang(langCode) {
+        if (!('speechSynthesis' in window)) return null;
+        const voices = window.speechSynthesis.getVoices();
+        
+        // 1. Exact match (e.g. 'ar-SA' -> 'ar-SA')
+        let matched = voices.find(v => v.lang.toLowerCase() === langCode.toLowerCase() || v.lang.replace('_', '-').toLowerCase() === langCode.toLowerCase());
+        if (matched) return matched;
+        
+        // 2. Prefix match (e.g. 'ar-SA' -> 'ar')
+        const langPrefix = langCode.split('-')[0].toLowerCase();
+        matched = voices.find(v => v.lang.toLowerCase().startsWith(langPrefix) || v.lang.replace('_', '-').toLowerCase().startsWith(langPrefix));
+        if (matched) return matched;
+
+        // 3. Fallback search by name
+        if (langPrefix === 'ar') {
+            matched = voices.find(v => v.name.toLowerCase().includes('arabic') || v.lang.toLowerCase().includes('ar'));
+        } else if (langPrefix === 'id') {
+            matched = voices.find(v => v.name.toLowerCase().includes('indonesia') || v.lang.toLowerCase().includes('id'));
+        }
+        return matched || null;
+    }
+
     function speakCurrentSlide() {
-        stopSpeaking(); // Cancel any active TTS
-        
+        stopSpeaking();
         if (!('speechSynthesis' in window)) return;
-
+        
         const slide = slides[currentSlideIndex];
+        const segments = [];
         
-        // Filter out arabic text to read in Indonesian voice
-        const contentTexts = slide.content
-            .filter(block => block.type !== 'arabic')
-            .map(block => {
-                if (block.type === 'list' && block.items) {
-                    return block.content + ". " + block.items.join(". ");
-                }
-                return block.content;
-            })
-            .join(". ");
-            
-        let textToSpeak = `${slide.title}. ${contentTexts}`;
-        // ponytail: replace (2x) with ", dibaca 2 kali" so TTS reads it as "dua kali" instead of "dua eks"
-        textToSpeak = textToSpeak.replace(/\((\d+)[xX]\)/g, ', dibaca $1 kali');
-        
-        const utterance = new SpeechSynthesisUtterance(textToSpeak);
-        utterance.lang = 'id-ID';
-        utterance.rate = 0.85;
-        utterance.pitch = 1.1;
-        
-        // Show TTS Active bar when speech starts
-        utterance.onstart = () => {
-            ttsActiveBar.style.display = 'flex';
-        };
-        
-        // Hide TTS Active bar when speech ends
-        utterance.onend = () => {
-            ttsActiveBar.style.display = 'none';
-        };
-        
-        utterance.onerror = () => {
-            ttsActiveBar.style.display = 'none';
-        };
+        // 1. Slide Intro
+        segments.push({
+            text: `Slide ${currentSlideIndex + 1} dari ${slides.length}. ${slide.title}.`,
+            lang: 'id-ID'
+        });
 
-        currentUtterance = utterance;
-        // Introduce 300ms delay to feel exactly like the Next.js prototype transition
+        // 2. Content Blocks
+        slide.content.forEach(block => {
+            switch(block.type) {
+                case 'arabic':
+                    // Hapus karakter nomor ayat seperti ﴿٤﴾, parentheses, dan angka lainnya
+                    const cleanArabic = block.content.replace(/[﴿﴾\d()\u0660-\u0669\u06F0-\u06F9]/g, '').trim();
+                    if (cleanArabic) {
+                        segments.push({
+                            text: cleanArabic,
+                            lang: 'ar-SA'
+                        });
+                    }
+                    break;
+                case 'transliteration':
+                    segments.push({
+                        text: 'Bacaan Arabnya: ' + normalizeIslamicText(block.content),
+                        lang: 'id-ID'
+                    });
+                    break;
+                case 'translation':
+                    segments.push({
+                        text: 'Artinya: ' + normalizeIslamicText(block.content),
+                        lang: 'id-ID'
+                    });
+                    break;
+                case 'list':
+                    const listText = (block.content || '') + '. ' + (block.items || []).map(item => normalizeIslamicText(item)).join('. ');
+                    segments.push({
+                        text: listText,
+                        lang: 'id-ID'
+                    });
+                    break;
+                default:
+                    segments.push({
+                        text: normalizeIslamicText(block.content || ''),
+                        lang: 'id-ID'
+                    });
+            }
+        });
+
+        let currentIndex = 0;
+        ttsActiveBar.style.display = 'flex';
+
+        function playNext() {
+            if (currentIndex >= segments.length) {
+                ttsActiveBar.style.display = 'none';
+                return;
+            }
+            
+            const seg = segments[currentIndex];
+            let txt = seg.text.replace(/\((\d+)[xX]\)/g, ', dibaca $1 kali');
+            currentIndex++;
+
+            if (!txt.trim()) {
+                playNext();
+                return;
+            }
+
+            if (seg.lang === 'ar-SA') {
+                const arabicVoice = getVoiceForLang('ar-SA');
+                if (arabicVoice) {
+                    const utterance = new SpeechSynthesisUtterance(txt);
+                    utterance.voice = arabicVoice;
+                    utterance.lang = 'ar-SA';
+                    utterance.rate = 0.70;
+                    utterance.pitch = 1.1;
+                    utterance.onend = playNext;
+                    utterance.onerror = () => {
+                        console.warn("Native Arabic TTS error, skipping to next segment.");
+                        playNext();
+                    };
+                    currentUtterances = [utterance];
+                    window.speechSynthesis.speak(utterance);
+                } else {
+                    // Google Translate TTS fallback for Arabic
+                    console.log("Playing Arabic block via Google Translate TTS API...");
+                    const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ar&client=tw-ob&q=${encodeURIComponent(txt)}`;
+                    const audio = new Audio();
+                    audio.referrerPolicy = "no-referrer";
+                    audio.src = url;
+                    currentAudio = audio;
+                    audio.onended = () => {
+                        currentAudio = null;
+                        playNext();
+                    };
+                    audio.onerror = (e) => {
+                        console.warn("Failed to play online Arabic TTS fallback:", e);
+                        currentAudio = null;
+                        // Final fallback: try native browser engine anyway
+                        const utterance = new SpeechSynthesisUtterance(txt);
+                        utterance.lang = 'ar-SA';
+                        utterance.rate = 0.70;
+                        utterance.onend = playNext;
+                        utterance.onerror = playNext;
+                        currentUtterances = [utterance];
+                        window.speechSynthesis.speak(utterance);
+                    };
+                    audio.play().catch(err => {
+                        console.warn("Autoplay/play blocked for online TTS audio:", err);
+                        currentAudio = null;
+                        // Fallback to native voice
+                        const utterance = new SpeechSynthesisUtterance(txt);
+                        utterance.lang = 'ar-SA';
+                        utterance.rate = 0.70;
+                        utterance.onend = playNext;
+                        utterance.onerror = playNext;
+                        currentUtterances = [utterance];
+                        window.speechSynthesis.speak(utterance);
+                    });
+                }
+            } else {
+                const utterance = new SpeechSynthesisUtterance(txt);
+                utterance.lang = seg.lang;
+                const idVoice = getVoiceForLang(seg.lang);
+                if (idVoice) utterance.voice = idVoice;
+                utterance.rate = slide.isCover ? 0.80 : 0.85;
+                utterance.pitch = 1.1;
+                utterance.onend = playNext;
+                utterance.onerror = () => {
+                    console.warn("Native ID TTS error, skipping to next segment.");
+                    playNext();
+                };
+                currentUtterances = [utterance];
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Start the queue with 300ms delay to feel smooth
         ttsTimeout = setTimeout(() => {
-            window.speechSynthesis.speak(utterance);
+            playNext();
         }, 300);
     }
 
@@ -442,10 +612,15 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(ttsTimeout);
             ttsTimeout = null;
         }
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio = null;
+        }
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
         }
         ttsActiveBar.style.display = 'none';
+        currentUtterances = [];
     }
 
     // ===== Keyboard Navigation Support =====
