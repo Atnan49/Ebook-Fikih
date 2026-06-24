@@ -65,18 +65,33 @@ const slides = [
     title: "Dalil Perintah Thaharah dari Al-Qur'an",
     content: [
       { type: "heading", content: "1. Surah Al-Muddasir Ayat 4-5" },
-      { type: "arabic", content: "وَثِيَابَكَ فَطَهِّرْ ﴿٤﴾ وَالرُّجْزَ فَاهْجُرْ ﴿٥﴾" },
+      {
+        type: "arabic",
+        content: "وَثِيَابَكَ فَطَهِّرْ ﴿٤﴾ وَالرُّجْزَ فَاهْجُرْ ﴿٥﴾",
+        surah: 74,
+        ayahs: [4, 5]
+      },
       { type: "transliteration", content: "Wa ṡiyābaka faṭahhir. War-rujza fahjur." },
       {
         type: "translation",
         content: "Pakaianmu, bersihkanlah! (4) Segala (perbuatan) yang keji, tinggalkanlah! (5) — QS. Al-Muddassir."
       },
-      { type: "heading", content: "2. Surah Al-Baqarah Ayat 222" },
-      { type: "arabic", content: "إِنَّ اللهَ يُحِبُّ التَّوَّابِيْنَ وَيُحِبُّ المُتَطَهِّرِيْنَ" },
-      { type: "transliteration", content: "Innallāha yuḥibbut-tawwābīna wa yuḥibbul-mutaṭahhirīn." },
+      { type: "heading", content: "2. Surah Al-Baqarah Ayat 222 (Sebagian)" },
+      {
+        type: "arabic",
+        content: "إِنَّ اللهَ يُحِبُّ التَّوَّابِيْنَ وَيُحِبُّ الْمُتَطَهِّرِيْنَ",
+        surah: 2,
+        ayahs: [222],
+        audioStart: 25.08,
+        audioEnd: 33.4
+      },
+      {
+        type: "transliteration",
+        content: "Innallāha yuḥibbut-tawwābīna wa yuḥibbul-mutaṭahhirīn."
+      },
       {
         type: "translation",
-        content: "Sesungguhnya Allah menyukai orang-orang yang bertobat dan menyukai orang-orang yang menyucikan diri."
+        content: "Sungguh, Allah menyukai orang yang bertobat dan menyukai orang yang menyucikan diri."
       }
     ]
   },

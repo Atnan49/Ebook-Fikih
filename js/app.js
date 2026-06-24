@@ -2,6 +2,29 @@
    [JOB: Atnan] Logika E-Book, Navigasi Flipbook, & Fitur Aksesibilitas UDL
    ========================================================================== */
 
+const surahVerseCounts = [
+  7, 286, 200, 176, 120, 165, 206, 75, 129, 109,
+  123, 111, 43, 52, 99, 128, 111, 110, 98, 135,
+  112, 78, 118, 64, 77, 227, 93, 88, 69, 60,
+  34, 30, 73, 54, 45, 83, 182, 88, 75, 85,
+  54, 53, 89, 59, 37, 35, 38, 29, 18, 45,
+  60, 49, 62, 55, 78, 96, 29, 22, 24, 13,
+  14, 11, 11, 18, 12, 12, 30, 52, 52, 44,
+  28, 28, 20, 56, 40, 31, 50, 40, 46, 42,
+  29, 19, 36, 25, 22, 17, 19, 26, 30, 20,
+  15, 21, 11, 8, 8, 19, 5, 8, 8, 11,
+  11, 8, 3, 9, 5, 4, 7, 3, 6, 3,
+  5, 4, 5, 6
+];
+
+function getGlobalAyahNumber(surah, ayah) {
+    let globalNum = 0;
+    for (let i = 0; i < surah - 1; i++) {
+        globalNum += surahVerseCounts[i];
+    }
+    return globalNum + ayah;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // ===== DOM Elements =====
     const slideCard = document.getElementById('slide-card');
@@ -43,7 +66,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let dyslexiaMode = false;
     let ttsEnabled = false;
     let currentUtterances = [];
-    let currentAudio = null;
+    let ttsAudioElement = null;
+
+    // Inisialisasi Audio Element untuk bypass autoplay policy
+    if (typeof window !== 'undefined') {
+        ttsAudioElement = document.createElement('audio');
+        ttsAudioElement.referrerPolicy = "no-referrer";
+        document.body.appendChild(ttsAudioElement);
+    }
 
     // Pre-warm the TTS voices cache for faster language matching
     if ('speechSynthesis' in window) {
@@ -419,6 +449,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function normalizeIslamicText(text) {
         return text
+            // Hapus tag HTML agar tidak dibaca oleh TTS
+            .replace(/<[^>]*>/g, '')
             // Hapus Arabic chars dulu (fix bug slide 22)
             .replace(/[\u0600-\u06FF\u0750-\u077F]+/g, '')
             .replace(/\s*—\s*/g, '. ')
@@ -442,22 +474,36 @@ document.addEventListener('DOMContentLoaded', () => {
     function getVoiceForLang(langCode) {
         if (!('speechSynthesis' in window)) return null;
         const voices = window.speechSynthesis.getVoices();
+        const lc = langCode.toLowerCase();
         
         // 1. Exact match (e.g. 'ar-SA' -> 'ar-SA')
-        let matched = voices.find(v => v.lang.toLowerCase() === langCode.toLowerCase() || v.lang.replace('_', '-').toLowerCase() === langCode.toLowerCase());
+        let matched = voices.find(v => {
+            if (!v.lang) return false;
+            const vLang = v.lang.toLowerCase();
+            return vLang === lc || vLang.replace('_', '-') === lc;
+        });
         if (matched) return matched;
         
         // 2. Prefix match (e.g. 'ar-SA' -> 'ar')
-        const langPrefix = langCode.split('-')[0].toLowerCase();
-        matched = voices.find(v => v.lang.toLowerCase().startsWith(langPrefix) || v.lang.replace('_', '-').toLowerCase().startsWith(langPrefix));
+        const langPrefix = lc.split('-')[0];
+        matched = voices.find(v => {
+            if (!v.lang) return false;
+            const vLang = v.lang.toLowerCase();
+            return vLang.startsWith(langPrefix) || vLang.replace('_', '-').startsWith(langPrefix);
+        });
         if (matched) return matched;
 
         // 3. Fallback search by name
-        if (langPrefix === 'ar') {
-            matched = voices.find(v => v.name.toLowerCase().includes('arabic') || v.lang.toLowerCase().includes('ar'));
-        } else if (langPrefix === 'id') {
-            matched = voices.find(v => v.name.toLowerCase().includes('indonesia') || v.lang.toLowerCase().includes('id'));
-        }
+        matched = voices.find(v => {
+            const name = (v.name || '').toLowerCase();
+            const lang = (v.lang || '').toLowerCase();
+            if (langPrefix === 'ar') {
+                return name.includes('arabic') || lang.includes('ar');
+            } else if (langPrefix === 'id') {
+                return name.includes('indonesia') || lang.includes('id');
+            }
+            return false;
+        });
         return matched || null;
     }
 
@@ -465,11 +511,27 @@ document.addEventListener('DOMContentLoaded', () => {
         stopSpeaking();
         if (!('speechSynthesis' in window)) return;
         
+        // Coba pre-unlock audio element dalam konteks user gesture (misal saat klik tombol ini)
+        if (ttsAudioElement) {
+            try {
+                ttsAudioElement.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAAA';
+                const playPromise = ttsAudioElement.play();
+                if (playPromise !== undefined && typeof playPromise.then === 'function') {
+                    playPromise.then(() => ttsAudioElement.pause()).catch(e => console.warn("Audio pre-unlock note:", e));
+                } else {
+                    ttsAudioElement.pause();
+                }
+            } catch (e) {
+                console.warn("Audio pre-unlock failed synchronously:", e);
+            }
+        }
+
         const slide = slides[currentSlideIndex];
         const segments = [];
         
         // 1. Slide Intro
         segments.push({
+            type: 'intro',
             text: `Slide ${currentSlideIndex + 1} dari ${slides.length}. ${slide.title}.`,
             lang: 'id-ID'
         });
@@ -478,23 +540,40 @@ document.addEventListener('DOMContentLoaded', () => {
         slide.content.forEach(block => {
             switch(block.type) {
                 case 'arabic':
-                    // Hapus karakter nomor ayat seperti ﴿٤﴾, parentheses, dan angka lainnya
-                    const cleanArabic = block.content.replace(/[﴿﴾\d()\u0660-\u0669\u06F0-\u06F9]/g, '').trim();
-                    if (cleanArabic) {
-                        segments.push({
-                            text: cleanArabic,
-                            lang: 'ar-SA'
+                    // Jika ini adalah ayat Quran (memiliki metadata block.surah & block.ayahs)
+                    if (block.surah && block.ayahs) {
+                        block.ayahs.forEach(ayah => {
+                            const globalAyah = getGlobalAyahNumber(block.surah, ayah);
+                            segments.push({
+                                type: 'arabic-quran',
+                                text: `https://cdn.islamic.network/quran/audio/128/ar.alafasy/${globalAyah}.mp3`,
+                                lang: 'ar-SA',
+                                audioStart: block.audioStart,
+                                audioEnd: block.audioEnd
+                            });
                         });
+                    } else {
+                        // Teks Arab Hadis / lainnya (tetap gunakan Google Translate TTS fallback)
+                        const cleanArabic = block.content.replace(/[﴿﴾\d()\u0660-\u0669\u06F0-\u06F9]/g, '').trim();
+                        if (cleanArabic) {
+                            segments.push({
+                                type: 'arabic',
+                                text: cleanArabic,
+                                lang: 'ar-SA'
+                            });
+                        }
                     }
                     break;
                 case 'transliteration':
                     segments.push({
+                        type: 'transliteration',
                         text: 'Bacaan Arabnya: ' + normalizeIslamicText(block.content),
                         lang: 'id-ID'
                     });
                     break;
                 case 'translation':
                     segments.push({
+                        type: 'translation',
                         text: 'Artinya: ' + normalizeIslamicText(block.content),
                         lang: 'id-ID'
                     });
@@ -502,12 +581,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 case 'list':
                     const listText = (block.content || '') + '. ' + (block.items || []).map(item => normalizeIslamicText(item)).join('. ');
                     segments.push({
+                        type: 'list',
                         text: listText,
                         lang: 'id-ID'
                     });
                     break;
                 default:
                     segments.push({
+                        type: 'text',
                         text: normalizeIslamicText(block.content || ''),
                         lang: 'id-ID'
                     });
@@ -515,6 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         let currentIndex = 0;
+        let arabicPlayedSuccessfully = false;
         ttsActiveBar.style.display = 'flex';
 
         function playNext() {
@@ -524,15 +606,74 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             const seg = segments[currentIndex];
-            let txt = seg.text.replace(/\((\d+)[xX]\)/g, ', dibaca $1 kali');
             currentIndex++;
 
-            if (!txt.trim()) {
+            // Jika segment ini adalah transliterasi dan kita sudah sukses membaca teks arab sebelumnya, lewati (skip) transliterasi agar tidak bosan/duplikasi
+            if (seg.type === 'transliteration' && arabicPlayedSuccessfully) {
+                arabicPlayedSuccessfully = false; // reset untuk pair berikutnya jika ada
                 playNext();
                 return;
             }
 
-            if (seg.lang === 'ar-SA') {
+            let txt = seg.text.replace(/\((\d+)[xX]\)/g, ', dibaca $1 kali');
+            if (seg.type !== 'arabic-quran' && !txt.trim()) {
+                playNext();
+                return;
+            }
+
+            if (seg.type === 'arabic-quran') {
+                console.log("Playing Quran recitation from CDN:", seg.text);
+                if (ttsAudioElement) {
+                    let hasSetStart = false;
+
+                    // ponytail: store reference for external cleanup
+                    ttsAudioElement._onTimeUpdate = () => {
+                        if (seg.audioStart && !hasSetStart && ttsAudioElement.currentTime < seg.audioStart) {
+                            ttsAudioElement.currentTime = seg.audioStart;
+                            hasSetStart = true;
+                        }
+                        if (seg.audioEnd && ttsAudioElement.currentTime >= seg.audioEnd) {
+                            cleanup();
+                            ttsAudioElement.pause();
+                            arabicPlayedSuccessfully = true;
+                            playNext();
+                        }
+                    };
+
+                    const cleanup = () => {
+                        if (ttsAudioElement._onTimeUpdate) {
+                            ttsAudioElement.removeEventListener('timeupdate', ttsAudioElement._onTimeUpdate);
+                            ttsAudioElement._onTimeUpdate = null;
+                        }
+                        ttsAudioElement.onended = null;
+                        ttsAudioElement.onerror = null;
+                    };
+
+                    ttsAudioElement.addEventListener('timeupdate', ttsAudioElement._onTimeUpdate);
+                    ttsAudioElement.src = seg.text;
+                    
+                    ttsAudioElement.onended = () => {
+                        cleanup();
+                        arabicPlayedSuccessfully = true;
+                        playNext();
+                    };
+                    ttsAudioElement.onerror = (e) => {
+                        console.warn("Failed to play Quran audio from CDN:", e);
+                        cleanup();
+                        arabicPlayedSuccessfully = false;
+                        playNext();
+                    };
+                    ttsAudioElement.play().catch(err => {
+                        console.warn("Autoplay blocked Quran audio play:", err);
+                        cleanup();
+                        arabicPlayedSuccessfully = false;
+                        playNext();
+                    });
+                } else {
+                    arabicPlayedSuccessfully = false;
+                    playNext();
+                }
+            } else if (seg.type === 'arabic') {
                 const arabicVoice = getVoiceForLang('ar-SA');
                 if (arabicVoice) {
                     const utterance = new SpeechSynthesisUtterance(txt);
@@ -540,51 +681,79 @@ document.addEventListener('DOMContentLoaded', () => {
                     utterance.lang = 'ar-SA';
                     utterance.rate = 0.70;
                     utterance.pitch = 1.1;
-                    utterance.onend = playNext;
+                    utterance.onend = () => {
+                        arabicPlayedSuccessfully = true;
+                        playNext();
+                    };
                     utterance.onerror = () => {
-                        console.warn("Native Arabic TTS error, skipping to next segment.");
+                        console.warn("Native Arabic TTS error, falling back to transliteration.");
+                        arabicPlayedSuccessfully = false;
                         playNext();
                     };
                     currentUtterances = [utterance];
                     window.speechSynthesis.speak(utterance);
                 } else {
-                    // Google Translate TTS fallback for Arabic
+                    // Google Translate TTS fallback for Arabic (Hadis)
                     console.log("Playing Arabic block via Google Translate TTS API...");
                     const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ar&client=tw-ob&q=${encodeURIComponent(txt)}`;
-                    const audio = new Audio();
-                    audio.referrerPolicy = "no-referrer";
-                    audio.src = url;
-                    currentAudio = audio;
-                    audio.onended = () => {
-                        currentAudio = null;
-                        playNext();
-                    };
-                    audio.onerror = (e) => {
-                        console.warn("Failed to play online Arabic TTS fallback:", e);
-                        currentAudio = null;
-                        // Final fallback: try native browser engine anyway
+                    if (ttsAudioElement) {
+                        let fallbackTriggered = false;
+
+                        function triggerHadisFallback(reason) {
+                            if (fallbackTriggered) return;
+                            fallbackTriggered = true;
+                            console.warn("Hadis Arabic fallback triggered due to:", reason);
+
+                            const utterance = new SpeechSynthesisUtterance(txt);
+                            utterance.lang = 'ar-SA';
+                            utterance.rate = 0.70;
+                            utterance.onend = () => {
+                                arabicPlayedSuccessfully = true;
+                                playNext();
+                            };
+                            utterance.onerror = () => {
+                                arabicPlayedSuccessfully = false;
+                                playNext();
+                            };
+                            currentUtterances = [utterance];
+                            window.speechSynthesis.speak(utterance);
+                        }
+
+                        ttsAudioElement.onended = () => {
+                            if (fallbackTriggered) return;
+                            arabicPlayedSuccessfully = true;
+                            playNext();
+                        };
+                        ttsAudioElement.onerror = () => {
+                            triggerHadisFallback("audio element error event");
+                        };
+                        ttsAudioElement.src = url;
+                        ttsAudioElement.play().catch(err => {
+                            triggerHadisFallback("play promise catch: " + err.message);
+                        });
+                    } else {
+                        // Fallback jika tidak ada ttsAudioElement
                         const utterance = new SpeechSynthesisUtterance(txt);
                         utterance.lang = 'ar-SA';
                         utterance.rate = 0.70;
-                        utterance.onend = playNext;
-                        utterance.onerror = playNext;
+                        utterance.onend = () => {
+                            arabicPlayedSuccessfully = true;
+                            playNext();
+                        };
+                        utterance.onerror = () => {
+                            arabicPlayedSuccessfully = false;
+                            playNext();
+                        };
                         currentUtterances = [utterance];
                         window.speechSynthesis.speak(utterance);
-                    };
-                    audio.play().catch(err => {
-                        console.warn("Autoplay/play blocked for online TTS audio:", err);
-                        currentAudio = null;
-                        // Fallback to native voice
-                        const utterance = new SpeechSynthesisUtterance(txt);
-                        utterance.lang = 'ar-SA';
-                        utterance.rate = 0.70;
-                        utterance.onend = playNext;
-                        utterance.onerror = playNext;
-                        currentUtterances = [utterance];
-                        window.speechSynthesis.speak(utterance);
-                    });
+                    }
                 }
             } else {
+                // Untuk selain arab (intro, translation, dll), reset flag arabicPlayedSuccessfully
+                if (seg.type !== 'transliteration') {
+                    arabicPlayedSuccessfully = false;
+                }
+
                 const utterance = new SpeechSynthesisUtterance(txt);
                 utterance.lang = seg.lang;
                 const idVoice = getVoiceForLang(seg.lang);
@@ -612,9 +781,16 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(ttsTimeout);
             ttsTimeout = null;
         }
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio = null;
+        if (ttsAudioElement) {
+            ttsAudioElement.pause();
+            // ponytail: clean up temporal listeners
+            if (ttsAudioElement._onTimeUpdate) {
+                ttsAudioElement.removeEventListener('timeupdate', ttsAudioElement._onTimeUpdate);
+                ttsAudioElement._onTimeUpdate = null;
+            }
+            ttsAudioElement.onended = null;
+            ttsAudioElement.onerror = null;
+            ttsAudioElement.src = 'about:blank';
         }
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
