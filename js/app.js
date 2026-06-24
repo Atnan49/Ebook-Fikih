@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (slide.image) {
                 coverHTML += `
-                    <div class="slide-image-wrapper">
+                    <div class="slide-image-wrapper animate-fade-in-up" style="animation-delay: 0.1s;">
                         <div class="relative-wrap">
                             <img src="${slide.image}" alt="${slide.title}" class="slide-img" />
                         </div>
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (slide.image) {
                 slideHTML += `
-                    <div class="slide-image-wrapper">
+                    <div class="slide-image-wrapper animate-fade-in-up" style="animation-delay: 0.1s;">
                         <img src="${slide.image}" alt="${slide.title}" class="slide-img" />
                     </div>
                 `;
