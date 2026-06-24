@@ -92,13 +92,12 @@ const slides = [
         type: "translation",
         content: '"Allah tidak menerima shalat salah seseorang di antara kalian jika berhadas hingga ia berwudhu." (H.R. Al-Bukhari)'
       },
+      { type: "arabic", content: "الطَّهُوْرُ شَطْرُ الْإِيْمَانِ" }, { type: "transliteration", content: "Aṭ-ṭahūru syaṭrul-īmān." },
+      { type: "translation", content: "Kesucian sebagian dari iman. (H.R. Imam Muslim)" },
       {
         type: "text",
         content: "Dalil-dalil tersebut mengajarkan kepada umat Islam untuk bersuci. Karena kesucian sebagian dari iman."
-      },
-      { type: "arabic", content: "الطَّهُوْرُ شَطْرُ Edِيْمَانُ" },
-      { type: "transliteration", content: "Aṭ-ṭahūru syaṭrul-īmān." },
-      { type: "translation", content: "Kesucian sebagian dari iman. (H.R. Imam Muslim)" }
+      }
     ]
   },
   {
