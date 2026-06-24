@@ -209,7 +209,7 @@ const slides = [
     bab: 1,
     subBab: "Bersuci dari Hadas",
     title: "Tata Cara Berwudhu",
-    image: "images/wudhu-illustration.png",
+    image: "images/wudhu-steps.png",
     content: [
       { type: "heading", content: "Membersihkan Hadas Kecil" },
       {
@@ -231,6 +231,7 @@ const slides = [
     bab: 1,
     subBab: "Bersuci dari Hadas",
     title: "Tata Cara Tayamum",
+    image: "images/tayamum-steps.png",
     content: [
       { type: "heading", content: "Membersihkan Hadas Kecil (Pengganti Wudhu)" },
       {
