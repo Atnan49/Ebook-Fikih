@@ -261,7 +261,8 @@
 
 .slide-img {
   border-radius: var(--radius-xl);
-  max-width: 160px;
+  width: 100%;
+  max-width: 480px;
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 4px 8px rgba(91, 155, 213, 0.15));
@@ -269,7 +270,7 @@
 
 @media(min-width: 640px) {
   .slide-img {
-    max-width: 180px;
+    max-width: 580px;
   }
 }
 
