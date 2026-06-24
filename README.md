@@ -57,8 +57,8 @@ Html Version/
 ├── css/
 │   └── style.css       # CSS utama & variabel (Dikerjakan oleh: Atnan)
 └── js/
-    ├── data.js         # Data slide & kuis (Dikerjakan oleh: Rifki & Narendra)
-    ├── app.js          # Logika Ebook & UDL (Dikerjakan oleh: Rifki)
+    ├── data.js         # Data slide & kuis (Dikerjakan oleh: Atnan)
+    ├── app.js          # Logika Ebook & UDL (Dikerjakan oleh: Atnan)
     └── quiz.js         # Logika kuis interaktif (Dikerjakan oleh: Narendra)
 ```
 
