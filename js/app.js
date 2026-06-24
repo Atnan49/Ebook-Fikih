@@ -407,7 +407,9 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .join(". ");
             
-        const textToSpeak = `${slide.title}. ${contentTexts}`;
+        let textToSpeak = `${slide.title}. ${contentTexts}`;
+        // ponytail: replace (2x) with ", dibaca 2 kali" so TTS reads it as "dua kali" instead of "dua eks"
+        textToSpeak = textToSpeak.replace(/\((\d+)[xX]\)/g, ', dibaca $1 kali');
         
         const utterance = new SpeechSynthesisUtterance(textToSpeak);
         utterance.lang = 'id-ID';
