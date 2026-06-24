@@ -488,7 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== Event Listeners setup =====
     btnPrev.addEventListener('click', prevSlide);
-    btnNext.addEventListener('click', nextSlide);
+    // ponytail: next button action is handled dynamically via .onclick in updateProgress() to support kuis redirect on last page.
     
     // Zoom Teks (Desktop)
     btnDecFont.addEventListener('click', () => {
