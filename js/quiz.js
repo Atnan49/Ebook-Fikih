@@ -71,6 +71,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 activeContent.classList.add('active');
                 activeContent.style.display = 'block';
             }
+
+            // ponytail: update sticky footer content based on active tab
+            const stickyNav = document.getElementById('quiz-sticky-nav');
+            if (targetTab === 'pg') {
+                renderQuizPG();
+            } else if (targetTab === 'essay') {
+                renderQuizEssay();
+            } else {
+                if (stickyNav) {
+                    stickyNav.innerHTML = '';
+                    stickyNav.style.display = 'none';
+                }
+            }
         });
     });
 
@@ -196,14 +209,19 @@ document.addEventListener('DOMContentLoaded', () => {
         card.appendChild(optionsList);
         tabPg.appendChild(card);
 
-        // C. Bottom Pagination Navigation
-        const navRow = document.createElement('div');
-        navRow.className = 'quiz-nav-buttons';
+        // C. Unified Control Bar (Sebelumnya, Kirim/Ulangi, Berikutnya)
+        const controlBar = document.createElement('div');
+        controlBar.className = 'quiz-nav-buttons';
 
         const prevBtn = document.createElement('button');
         prevBtn.className = 'btn-nav-prev';
         prevBtn.disabled = currentQuestionIndex === 0;
-        prevBtn.innerHTML = '← Sebelumnya';
+        prevBtn.innerHTML = `
+            <svg class="nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span class="hidden-xs">Sebelumnya</span>
+        `;
         prevBtn.addEventListener('click', () => {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
@@ -211,10 +229,39 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        const submitBtn = document.createElement('button');
+        submitBtn.id = 'btn-submit-pg';
+        submitBtn.className = 'btn-quiz-action';
+        if (isPgSubmitted) {
+            submitBtn.innerHTML = `
+                <svg class="action-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 4v6h-6"></path>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                </svg>
+                <span class="hidden-xs">Ulangi Kuis</span>
+                <span class="visible-xs">Ulangi</span>
+            `;
+        } else {
+            submitBtn.innerHTML = `
+                <svg class="action-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span class="hidden-xs">Kirim Jawaban</span>
+                <span class="visible-xs">Kirim</span>
+            `;
+        }
+        submitBtn.addEventListener('click', handlePgSubmit);
+
         const nextBtn = document.createElement('button');
         nextBtn.className = 'btn-nav-next';
         nextBtn.disabled = currentQuestionIndex === quizPG.length - 1;
-        nextBtn.innerHTML = 'Berikutnya →';
+        nextBtn.innerHTML = `
+            <span class="hidden-xs">Berikutnya</span>
+            <svg class="nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        `;
         nextBtn.addEventListener('click', () => {
             if (currentQuestionIndex < quizPG.length - 1) {
                 currentQuestionIndex++;
@@ -222,25 +269,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        navRow.appendChild(prevBtn);
-        navRow.appendChild(nextBtn);
-        tabPg.appendChild(navRow);
+        // ponytail: render controls into the sticky footer navigation bar if active
+        controlBar.appendChild(prevBtn);
+        controlBar.appendChild(submitBtn);
+        controlBar.appendChild(nextBtn);
 
-        // D. Kirim Jawaban (Submit) / Ulangi Kuis Section
-        const actionRow = document.createElement('div');
-        actionRow.className = 'action-container';
-        actionRow.style.marginTop = '2rem';
-
-        const submitBtn = document.createElement('button');
-        submitBtn.id = 'btn-submit-pg';
-        submitBtn.className = 'btn-quiz-action';
-        submitBtn.innerHTML = isPgSubmitted 
-            ? 'Ulangi Kuis' 
-            : 'Kirim Jawaban';
-
-        submitBtn.addEventListener('click', handlePgSubmit);
-        actionRow.appendChild(submitBtn);
-        tabPg.appendChild(actionRow);
+        const isPgActive = document.querySelector('.tab-btn[data-tab="pg"]').classList.contains('active');
+        if (isPgActive) {
+            const stickyNav = document.getElementById('quiz-sticky-nav');
+            if (stickyNav) {
+                stickyNav.innerHTML = '';
+                stickyNav.appendChild(controlBar);
+                stickyNav.style.display = 'block';
+            }
+        }
 
         // E. Score display if submitted
         if (isPgSubmitted) {
@@ -451,7 +493,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const prevBtn = document.createElement('button');
         prevBtn.className = 'btn-nav-prev';
         prevBtn.disabled = currentEssayIndex === 0;
-        prevBtn.innerHTML = '← Sebelumnya';
+        prevBtn.innerHTML = `
+            <svg class="nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span class="hidden-xs">Sebelumnya</span>
+        `;
         prevBtn.addEventListener('click', () => {
             essayAnswers[currentEssayIndex] = textarea.value;
             if (currentEssayIndex > 0) {
@@ -463,7 +510,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const nextBtn = document.createElement('button');
         nextBtn.className = 'btn-nav-next';
         nextBtn.disabled = currentEssayIndex === quizEssay.length - 1;
-        nextBtn.innerHTML = 'Berikutnya →';
+        nextBtn.innerHTML = `
+            <span class="hidden-xs">Berikutnya</span>
+            <svg class="nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        `;
         nextBtn.addEventListener('click', () => {
             essayAnswers[currentEssayIndex] = textarea.value;
             if (currentEssayIndex < quizEssay.length - 1) {
@@ -472,9 +524,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // ponytail: render controls into the sticky footer navigation bar if active
         navRow.appendChild(prevBtn);
         navRow.appendChild(nextBtn);
-        tabEssay.appendChild(navRow);
+
+        const isEssayActive = document.querySelector('.tab-btn[data-tab="essay"]').classList.contains('active');
+        if (isEssayActive) {
+            const stickyNav = document.getElementById('quiz-sticky-nav');
+            if (stickyNav) {
+                stickyNav.innerHTML = '';
+                stickyNav.appendChild(navRow);
+                stickyNav.style.display = 'block';
+            }
+        }
     }
 
     // ===== 4. Logika Tugas Praktik =====
