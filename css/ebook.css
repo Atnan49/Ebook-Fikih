@@ -944,3 +944,28 @@
   }
 }
 
+/* ===== Lafaz Adzan List Separation ===== */
+.lafaz-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 0.15rem;
+  margin-bottom: 0.35rem;
+}
+
+.lafaz-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.35em;
+  line-height: 1.4;
+  color: var(--color-blue-800);
+  margin-bottom: 0.15rem;
+}
+
+.lafaz-latin {
+  font-size: 0.85em;
+  color: rgba(22, 59, 96, 0.65);
+  font-style: italic;
+}
+
+
