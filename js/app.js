@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let ttsEnabled = false;
     let currentUtterances = [];
     let ttsAudioElement = null;
+    let currentTtsSessionId = 0;
 
     // Inisialisasi Audio Element untuk bypass autoplay policy
     if (typeof window !== 'undefined') {
@@ -509,6 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function speakCurrentSlide() {
         stopSpeaking();
+        const sessionId = currentTtsSessionId;
         if (!('speechSynthesis' in window)) return;
         
         // Coba pre-unlock audio element dalam konteks user gesture (misal saat klik tombol ini)
@@ -593,17 +595,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             const latMatch = item.match(/class=["']lafaz-latin["'][^>]*>([^<]+)<\/span>/);
                             
                             if (arMatch && arMatch[1]) {
+                                let arText = arMatch[1].trim();
+                                // ponytail: repeat the Arabic text twice if (2x) is present in the Latin transliteration
+                                if (latMatch && latMatch[1] && /\(\d+[xX]\)/.test(latMatch[1])) {
+                                    arText = `${arText}. ${arText}.`;
+                                }
                                 segments.push({
                                     type: 'arabic',
-                                    text: arMatch[1].trim(),
+                                    text: arText,
                                     lang: 'ar-SA'
-                                });
-                            }
-                            if (latMatch && latMatch[1]) {
-                                segments.push({
-                                    type: 'transliteration',
-                                    text: normalizeIslamicText(latMatch[1]),
-                                    lang: 'id-ID'
                                 });
                             }
                         } else {
@@ -629,6 +629,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ttsActiveBar.style.display = 'flex';
 
         function playNext() {
+            if (sessionId !== currentTtsSessionId) return;
             if (currentIndex >= segments.length) {
                 ttsActiveBar.style.display = 'none';
                 return;
@@ -729,6 +730,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         let fallbackTriggered = false;
 
                         function triggerHadisFallback(reason) {
+                            if (sessionId !== currentTtsSessionId) return;
                             if (fallbackTriggered) return;
                             fallbackTriggered = true;
                             console.warn("Hadis Arabic fallback triggered due to:", reason);
@@ -806,9 +808,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function stopSpeaking() {
+        currentTtsSessionId++;
         if (ttsTimeout) {
             clearTimeout(ttsTimeout);
             ttsTimeout = null;
+        }
+        if (currentUtterances && currentUtterances.length > 0) {
+            currentUtterances.forEach(u => {
+                u.onend = null;
+                u.onerror = null;
+            });
+            currentUtterances = [];
         }
         if (ttsAudioElement) {
             ttsAudioElement.pause();
@@ -825,7 +835,6 @@ document.addEventListener('DOMContentLoaded', () => {
             window.speechSynthesis.cancel();
         }
         ttsActiveBar.style.display = 'none';
-        currentUtterances = [];
     }
 
     // ===== Keyboard Navigation Support =====
@@ -958,7 +967,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     btnTtsStop.addEventListener('click', () => {
-        stopSpeaking();
+        ttsEnabled = false;
+        applyTtsState();
     });
 
     // TOC Sidebar open/close
