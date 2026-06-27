@@ -448,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function normalizeIslamicText(text) {
-        return text
+        const cleanText = text
             // Hapus tag HTML agar tidak dibaca oleh TTS
             .replace(/<[^>]*>/g, '')
             // Hapus Arabic chars dulu (fix bug slide 22)
@@ -463,12 +463,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Expand singkatan Islami
             .replace(/\bSAW\.?\b/gi, 'shallallahu alaihi wasallam')
             .replace(/\bSWT\.?\b/gi, 'subhanahu wataala')
-            .replace(/\bRA\.?\b/gi, 'radhiyallahu anhu')
-            // Hapus diakritik Arab di transliterasi
-            .replace(/[āÃ]/g, 'a').replace(/[īÄ«]/g, 'i').replace(/[ūÅ«]/g, 'u')
-            .replace(/[ṭṬḥḤṡṠṣṢ]/g, match => 'thhs'['ṭṬḥḤṡṠṣṢ'.indexOf(match)])
-            // Cleanup
-            .replace(/\s{2,}/g, ' ').trim();
+            .replace(/\bRA\.?\b/gi, 'radhiyallahu anhu');
+
+        // ponytail: use existing stripDiacritics helper to clean transliterations
+        return stripDiacritics(cleanText)
+            .replace(/\s{2,}/g, ' ')
+            .trim();
     }
 
     function getVoiceForLang(langCode) {
@@ -579,11 +579,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     break;
                 case 'list':
-                    const listText = (block.content || '') + '. ' + (block.items || []).map(item => normalizeIslamicText(item)).join('. ');
-                    segments.push({
-                        type: 'list',
-                        text: listText,
-                        lang: 'id-ID'
+                    // ponytail: handle list items with custom lafaz-arabic and lafaz-latin HTML for TTS
+                    if (block.content) {
+                        segments.push({
+                            type: 'text',
+                            text: normalizeIslamicText(block.content),
+                            lang: 'id-ID'
+                        });
+                    }
+                    (block.items || []).forEach(item => {
+                        if (item.includes('lafaz-arabic')) {
+                            const arMatch = item.match(/class=["']lafaz-arabic["'][^>]*>([^<]+)<\/span>/);
+                            const latMatch = item.match(/class=["']lafaz-latin["'][^>]*>([^<]+)<\/span>/);
+                            
+                            if (arMatch && arMatch[1]) {
+                                segments.push({
+                                    type: 'arabic',
+                                    text: arMatch[1].trim(),
+                                    lang: 'ar-SA'
+                                });
+                            }
+                            if (latMatch && latMatch[1]) {
+                                segments.push({
+                                    type: 'transliteration',
+                                    text: normalizeIslamicText(latMatch[1]),
+                                    lang: 'id-ID'
+                                });
+                            }
+                        } else {
+                            segments.push({
+                                type: 'text',
+                                text: normalizeIslamicText(item),
+                                lang: 'id-ID'
+                            });
+                        }
                     });
                     break;
                 default:

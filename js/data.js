@@ -424,13 +424,13 @@ const slides = [
         type: "list",
         content: "Lafaz Adzan",
         items: [
-          "اللهُ أَكْبَرُ اللهُ أَكْبَرُ — Allāhu Akbar Allāhu Akbar (2x)",
-          "أَشْهَدُ أَنْ لاَ إِلٰهَ إِلَّا اللهُ — Asyhadu an lā ilāha illallāh (2x)",
-          "أَشْهَدُ أَنَّ مُحَمَّدًا رَسُوْلُ اللهِ — Asyhadu anna Muḥammadan rasūlullāh (2x)",
-          "حَيَّ عَلَى الصَّلاَةِ — Ḥayya 'alaṣ-ṣalāh (2x)",
-          "حَيَّ عَلَى الْفَلَاحِ — Ḥayya 'alal-falāḥ (2x)",
-          "اللهُ أَكْبَرُ اللهُ أَكْبَرُ — Allāhu Akbar Allāhu Akbar",
-          "لاَ إِلٰهَ إِلَّا اللهُ — Lā ilāha illallāh"
+          "<div class=\"lafaz-row\"><span class=\"lafaz-arabic\" dir=\"rtl\" lang=\"ar\">اللهُ أَكْبَرُ اللهُ أَكْبَرُ</span><span class=\"lafaz-latin\">Allāhu Akbar Allāhu Akbar (2x)</span></div>",
+          "<div class=\"lafaz-row\"><span class=\"lafaz-arabic\" dir=\"rtl\" lang=\"ar\">أَشْهَدُ أَنْ لاَ إِلٰهَ إِلَّا اللهُ</span><span class=\"lafaz-latin\">Asyhadu an lā ilāha illallāh (2x)</span></div>",
+          "<div class=\"lafaz-row\"><span class=\"lafaz-arabic\" dir=\"rtl\" lang=\"ar\">أَشْهَدُ أَنَّ مُحَمَّدًا رَسُوْلُ اللهِ</span><span class=\"lafaz-latin\">Asyhadu anna Muḥammadan rasūlullāh (2x)</span></div>",
+          "<div class=\"lafaz-row\"><span class=\"lafaz-arabic\" dir=\"rtl\" lang=\"ar\">حَيَّ عَلَى الصَّلاَةِ</span><span class=\"lafaz-latin\">Ḥayya 'alaṣ-ṣalāh (2x)</span></div>",
+          "<div class=\"lafaz-row\"><span class=\"lafaz-arabic\" dir=\"rtl\" lang=\"ar\">حَيَّ عَلَى الْفَلَاحِ</span><span class=\"lafaz-latin\">Ḥayya 'alal-falāḥ (2x)</span></div>",
+          "<div class=\"lafaz-row\"><span class=\"lafaz-arabic\" dir=\"rtl\" lang=\"ar\">اللهُ أَكْبَرُ اللهُ أَكْبَرُ</span><span class=\"lafaz-latin\">Allāhu Akbar Allāhu Akbar</span></div>",
+          "<div class=\"lafaz-row\"><span class=\"lafaz-arabic\" dir=\"rtl\" lang=\"ar\">لاَ إِلٰهَ إِلَّا اللهُ</span><span class=\"lafaz-latin\">Lā ilāha illallāh</span></div>"
         ]
       }
     ]
