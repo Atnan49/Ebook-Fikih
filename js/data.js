@@ -14,7 +14,7 @@ const slides = [
     bab: 1,
     subBab: "Pendahuluan",
     title: "BAB I: THAHARAH (BERSUCI)",
-    image: "images/wudhu-illustration.png",
+    image: "images/wudhu-illustration.webp",
     isCover: true,
     content: [
       {
@@ -33,7 +33,7 @@ const slides = [
     bab: 1,
     subBab: "Pengertian Thaharah",
     title: "Yuk Cuci Tangan!",
-    image: "images/wudhu-illustration.png",
+    image: "images/wudhu-illustration.webp",
     content: [
       { type: "heading", content: "Kenapa Kita Harus Cuci Tangan?" },
       {
@@ -223,7 +223,7 @@ const slides = [
     bab: 1,
     subBab: "Bersuci dari Hadas",
     title: "Tata Cara Berwudhu",
-    image: "images/wudhu-steps.jpg",
+    image: "images/wudhu-steps.webp",
     content: [
       { type: "heading", content: "Membersihkan Hadas Kecil" },
       {
@@ -245,7 +245,7 @@ const slides = [
     bab: 1,
     subBab: "Bersuci dari Hadas",
     title: "Tata Cara Tayamum",
-    image: "images/tayamum-steps.jpg",
+    image: "images/tayamum-steps.webp",
     content: [
       { type: "heading", content: "Membersihkan Hadas Kecil (Pengganti Wudhu)" },
       {
@@ -309,7 +309,7 @@ const slides = [
     bab: 2,
     subBab: "Pendahuluan",
     title: "BAB II: KETENTUAN ADZAN DAN IQAMAH",
-    image: "images/mosque-illustration.png",
+    image: "images/mosque-illustration.webp",
     isCover: true,
     content: [
       {
@@ -327,7 +327,7 @@ const slides = [
     bab: 2,
     subBab: "Adzan",
     title: "Apakah Kamu Mendengar Adzan?",
-    image: "images/mosque-illustration.png",
+    image: "images/mosque-illustration.webp",
     content: [
       { type: "heading", content: "Kapan kamu mendengar adzan?" },
       { type: "text", content: "Ketika masuk waktu shalat." },
