@@ -710,67 +710,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     playNext();
                 }
             } else if (seg.type === 'arabic') {
-                const arabicVoice = getVoiceForLang('ar-SA');
-                if (arabicVoice) {
-                    const utterance = new SpeechSynthesisUtterance(txt);
-                    utterance.voice = arabicVoice;
-                    utterance.lang = 'ar-SA';
-                    utterance.rate = 0.70;
-                    utterance.pitch = 1.1;
-                    utterance.onend = () => {
-                        arabicPlayedSuccessfully = true;
-                        playNext();
-                    };
-                    utterance.onerror = () => {
-                        console.warn("Native Arabic TTS error, falling back to transliteration.");
-                        arabicPlayedSuccessfully = false;
-                        playNext();
-                    };
-                    currentUtterances = [utterance];
-                    window.speechSynthesis.speak(utterance);
-                } else {
-                    // Google Translate TTS fallback for Arabic (Hadis)
-                    console.log("Playing Arabic block via Google Translate TTS API...");
-                    const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ar&client=tw-ob&q=${encodeURIComponent(txt)}`;
-                    if (ttsAudioElement) {
-                        let fallbackTriggered = false;
+                // Selalu utamakan Google Translate TTS API (sangat stabil & natural)
+                console.log("Playing Arabic block via Google Translate TTS API...");
+                const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ar&client=tw-ob&q=${encodeURIComponent(txt)}`;
+                
+                if (ttsAudioElement) {
+                    let fallbackTriggered = false;
 
-                        function triggerHadisFallback(reason) {
-                            if (sessionId !== currentTtsSessionId) return;
-                            if (fallbackTriggered) return;
-                            fallbackTriggered = true;
-                            console.warn("Hadis Arabic fallback triggered due to:", reason);
+                    const triggerHadisFallback = (reason) => {
+                        if (sessionId !== currentTtsSessionId) return;
+                        if (fallbackTriggered) return;
+                        fallbackTriggered = true;
+                        console.warn("Hadis Arabic fallback triggered due to:", reason);
 
-                            const utterance = new SpeechSynthesisUtterance(txt);
-                            utterance.lang = 'ar-SA';
-                            utterance.rate = 0.70;
-                            utterance.onend = () => {
-                                arabicPlayedSuccessfully = true;
-                                playNext();
-                            };
-                            utterance.onerror = () => {
-                                arabicPlayedSuccessfully = false;
-                                playNext();
-                            };
-                            currentUtterances = [utterance];
-                            window.speechSynthesis.speak(utterance);
-                        }
-
-                        ttsAudioElement.onended = () => {
-                            if (fallbackTriggered) return;
-                            arabicPlayedSuccessfully = true;
-                            playNext();
-                        };
-                        ttsAudioElement.onerror = () => {
-                            triggerHadisFallback("audio element error event");
-                        };
-                        ttsAudioElement.src = url;
-                        ttsAudioElement.play().catch(err => {
-                            triggerHadisFallback("play promise catch: " + err.message);
-                        });
-                    } else {
-                        // Fallback jika tidak ada ttsAudioElement
                         const utterance = new SpeechSynthesisUtterance(txt);
+                        const arabicVoice = getVoiceForLang('ar-SA');
+                        if (arabicVoice) utterance.voice = arabicVoice;
                         utterance.lang = 'ar-SA';
                         utterance.rate = 0.70;
                         utterance.onend = () => {
@@ -783,7 +738,46 @@ document.addEventListener('DOMContentLoaded', () => {
                         };
                         currentUtterances = [utterance];
                         window.speechSynthesis.speak(utterance);
-                    }
+                    };
+
+                    const cleanup = () => {
+                        ttsAudioElement.onended = null;
+                        ttsAudioElement.onerror = null;
+                    };
+
+                    ttsAudioElement.onended = () => {
+                        if (fallbackTriggered) return;
+                        cleanup();
+                        arabicPlayedSuccessfully = true;
+                        playNext();
+                    };
+                    ttsAudioElement.onerror = () => {
+                        cleanup();
+                        triggerHadisFallback("audio element error event");
+                    };
+                    
+                    ttsAudioElement.src = url;
+                    ttsAudioElement.play().catch(err => {
+                        cleanup();
+                        triggerHadisFallback("play promise catch: " + err.message);
+                    });
+                } else {
+                    // Fallback langsung ke Web Speech API jika tidak ada ttsAudioElement
+                    const utterance = new SpeechSynthesisUtterance(txt);
+                    const arabicVoice = getVoiceForLang('ar-SA');
+                    if (arabicVoice) utterance.voice = arabicVoice;
+                    utterance.lang = 'ar-SA';
+                    utterance.rate = 0.70;
+                    utterance.onend = () => {
+                        arabicPlayedSuccessfully = true;
+                        playNext();
+                    };
+                    utterance.onerror = () => {
+                        arabicPlayedSuccessfully = false;
+                        playNext();
+                    };
+                    currentUtterances = [utterance];
+                    window.speechSynthesis.speak(utterance);
                 }
             } else {
                 // Untuk selain arab (intro, translation, dll), reset flag arabicPlayedSuccessfully
