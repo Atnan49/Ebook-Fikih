@@ -658,8 +658,8 @@ const quizPG = [
   { id: 15, question: "Imam dan makmum salat berjamaah berada di…", options: ["Tempat berbeda", "Satu tempat", "Tempat terbuka"], correctIndex: 1 },
   { id: 16, question: "Orang yang meninggalkan salat berjamaah termasuk…", options: ["Beruntung", "Bahagia", "Merugi"], correctIndex: 2 },
   { id: 17, question: "Makmum anak Perempuan berdiri di… Makmum Perempuan dewasa", options: ["Depan", "Belakang", "Samping"], correctIndex: 0 },
-  { id: 18, question: "Perhatikan gambar barisan salat berikut. Siapakah sebutan untuk orang yang berada di posisi paling depan dan memimpin salat berjamaah?", options: ["Muazin", "Imam", "Khatib"], correctIndex: 1 },
-  { id: 19, question: "Perhatikan gambar berikut. Yang baru datang biasanya disebut apa?", options: ["Muwafiq", "Munfarid", "Masbuq"], correctIndex: 2 },
+  { id: 18, question: "Perhatikan gambar barisan salat berikut. Siapakah sebutan untuk orang yang berada di posisi paling depan dan memimpin salat berjamaah?", image: "images/Picture21.jpg", options: ["Muazin", "Imam", "Khatib"], correctIndex: 1 },
+  { id: 19, question: "Perhatikan gambar berikut. Yang baru datang biasanya disebut apa?", image: "images/Picture22.jpg", options: ["Muwafiq", "Munfarid", "Masbuq"], correctIndex: 2 },
   { id: 20, question: "Pahala orang yang melaksanakan salat berjamaah berapa darajat…", options: ["17", "27", "37"], correctIndex: 1 },
   { id: 21, question: "Saf yang terputus dalam salat berjamaah akan diisi oleh…", options: ["Malaikat", "Setan", "Hewan"], correctIndex: 1 }
 ];

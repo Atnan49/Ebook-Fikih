@@ -5,3 +5,10 @@
 .vercel
 MATERI FIKIH.docx
 SRS-EBOOK.md
+docx_extracted_temp/
+*.tmp
+scratch.js
+fix_images.js
+update_data.js
+docx_parsed.txt
+docx_structure.txt
