@@ -108,11 +108,36 @@ document.addEventListener('DOMContentLoaded', () => {
         infoTitle.textContent = 'Pilihlah Jawaban yang Paling Benar!';
         tabPg.appendChild(infoTitle);
 
-        // A. Question Navigation Grid (1 - 10)
+        // A. Question Navigation Grid grouped by Bab
         const gridContainer = document.createElement('div');
-        gridContainer.className = 'quiz-nav-grid';
+        gridContainer.className = 'quiz-nav-grid-grouped';
 
+        let lastBab = 0;
+        let currentBabGrid = null;
+        
         for (let i = 0; i < quizPG.length; i++) {
+            const q = quizPG[i];
+            // ponytail: insert bab container when bab changes
+            if (q.bab !== lastBab) {
+                lastBab = q.bab;
+                
+                const babGroup = document.createElement('div');
+                babGroup.className = 'quiz-bab-group';
+
+                const babLabel = document.createElement('div');
+                babLabel.className = 'quiz-bab-label';
+                const babTitleText = q.bab === 1 ? "Salat Fardhu" : "Mendirikan Salat Berjamaah";
+                babLabel.innerHTML = `<span class="bab-badge">BAB ${q.bab}</span> <span class="bab-text">${babTitleText}</span>`;
+                babGroup.appendChild(babLabel);
+
+                currentBabGrid = document.createElement('div');
+                currentBabGrid.className = 'quiz-nav-grid';
+                currentBabGrid.dataset.bab = q.bab;
+                babGroup.appendChild(currentBabGrid);
+                
+                gridContainer.appendChild(babGroup);
+            }
+
             const btn = document.createElement('button');
             btn.className = 'nav-grid-item';
             btn.textContent = i + 1;
@@ -131,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.classList.add('answered');
                 }
             } else if (isPgSubmitted) {
-                // If submitted but not answered, count as wrong
                 btn.classList.add('wrong');
             }
 
@@ -141,7 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderQuizPG();
             });
 
-            gridContainer.appendChild(btn);
+            // Append to the current bab grid
+            currentBabGrid.appendChild(btn);
         }
         tabPg.appendChild(gridContainer);
 
@@ -385,11 +410,36 @@ document.addEventListener('DOMContentLoaded', () => {
         infoTitle.textContent = 'Jawablah Pertanyaan Essay Berikut!';
         tabEssay.appendChild(infoTitle);
 
-        // A. Question Navigation Grid (1 - 5)
+        // A. Question Navigation Grid grouped by Bab
         const gridContainer = document.createElement('div');
-        gridContainer.className = 'quiz-nav-grid';
+        gridContainer.className = 'quiz-nav-grid-grouped';
 
+        let lastBab = 0;
+        let currentBabGrid = null;
+        
         for (let i = 0; i < quizEssay.length; i++) {
+            const q = quizEssay[i];
+            // ponytail: insert bab container when bab changes
+            if (q.bab !== lastBab) {
+                lastBab = q.bab;
+                
+                const babGroup = document.createElement('div');
+                babGroup.className = 'quiz-bab-group';
+
+                const babLabel = document.createElement('div');
+                babLabel.className = 'quiz-bab-label';
+                const babTitleText = q.bab === 1 ? "Salat Fardhu" : "Mendirikan Salat Berjamaah";
+                babLabel.innerHTML = `<span class="bab-badge">BAB ${q.bab}</span> <span class="bab-text">${babTitleText}</span>`;
+                babGroup.appendChild(babLabel);
+
+                currentBabGrid = document.createElement('div');
+                currentBabGrid.className = 'quiz-nav-grid';
+                currentBabGrid.dataset.bab = q.bab;
+                babGroup.appendChild(currentBabGrid);
+                
+                gridContainer.appendChild(babGroup);
+            }
+
             const btn = document.createElement('button');
             btn.className = 'nav-grid-item';
             btn.textContent = i + 1;
@@ -415,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderQuizEssay();
             });
 
-            gridContainer.appendChild(btn);
+            currentBabGrid.appendChild(btn);
         }
         tabEssay.appendChild(gridContainer);
 

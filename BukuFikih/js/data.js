@@ -638,41 +638,41 @@ const babInfo = [
  * Gunakan variabel `quizPG`, `quizEssay`, dan `praktikInfo` di bawah ini untuk merender kuis di kuis.html.
  */
 const quizPG = [
-  // BAB 1
-  { id: 1, question: "Kata salat menurut bahasa adalah…", options: ["Zakat", "Puasa", "Doa"], correctIndex: 2 },
-  { id: 2, question: "Salat merupakan Ibadah yang diperintahkan oleh…", options: ["Orang tua", "Allah", "Guru"], correctIndex: 1 },
-  { id: 3, question: "Orang yang menjaga salat fardhu tepat waktu bersikap…", options: ["Jujur", "Disiplin", "Kerjasama"], correctIndex: 1 },
-  { id: 4, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar duduk tahiyat akhir)", image: "images/Picture18.jpg", options: ["Duduk tahiyat akhir", "Sujud", "Rukuk"], correctIndex: 0 },
-  { id: 5, question: "Gerakan terakhir dalam ibadah salat adalah…", options: ["Salam", "Rukuk", "Sujud"], correctIndex: 0 },
-  { id: 6, question: "Hukum mengerjakan salat fardhu 5 waktu adalah…", options: ["Sunah", "Wajib", "Mubah"], correctIndex: 1 },
-  { id: 7, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar takbiratul ikhram)", image: "images/Picture19.jpg", options: ["Takbiratul ikhram", "Sujud", "Rukuk"], correctIndex: 0 },
-  { id: 8, question: "Meninggalkan shalat isya' hukumnya…", options: ["Wajib", "Sunah", "Haram"], correctIndex: 2 },
-  { id: 9, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar bersedekap)", image: "images/Picture20.jpg", options: ["Duduk tahiyatul awal", "Salam", "Bersedekap"], correctIndex: 2 },
-  { id: 10, question: "Jika tidak mampu berdiri dapat melakukan salat dengan posisi…", options: ["Duduk", "Jongkok", "Bersandar"], correctIndex: 0 },
+  // BAB 1 — Salat Fardhu
+  { id: 1, bab: 1, question: "Kata salat menurut bahasa adalah…", options: ["Zakat", "Puasa", "Doa"], correctIndex: 2 },
+  { id: 2, bab: 1, question: "Salat merupakan Ibadah yang diperintahkan oleh…", options: ["Orang tua", "Allah", "Guru"], correctIndex: 1 },
+  { id: 3, bab: 1, question: "Orang yang menjaga salat fardhu tepat waktu bersikap…", options: ["Jujur", "Disiplin", "Kerjasama"], correctIndex: 1 },
+  { id: 4, bab: 1, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar duduk tahiyat akhir)", image: "images/Picture18.jpg", options: ["Duduk tahiyat akhir", "Sujud", "Rukuk"], correctIndex: 0 },
+  { id: 5, bab: 1, question: "Gerakan terakhir dalam ibadah salat adalah…", options: ["Salam", "Rukuk", "Sujud"], correctIndex: 0 },
+  { id: 6, bab: 1, question: "Hukum mengerjakan salat fardhu 5 waktu adalah…", options: ["Sunah", "Wajib", "Mubah"], correctIndex: 1 },
+  { id: 7, bab: 1, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar takbiratul ikhram)", image: "images/Picture19.jpg", options: ["Takbiratul ikhram", "Sujud", "Rukuk"], correctIndex: 0 },
+  { id: 8, bab: 1, question: "Meninggalkan shalat isya' hukumnya…", options: ["Wajib", "Sunah", "Haram"], correctIndex: 2 },
+  { id: 9, bab: 1, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar bersedekap)", image: "images/Picture20.jpg", options: ["Duduk tahiyatul awal", "Salam", "Bersedekap"], correctIndex: 2 },
+  { id: 10, bab: 1, question: "Jika tidak mampu berdiri dapat melakukan salat dengan posisi…", options: ["Duduk", "Jongkok", "Bersandar"], correctIndex: 0 },
   
-  // BAB 2
-  { id: 11, question: "Orang yang memimpin salat berjamaah di masjid dari golongan?", options: ["Perempuan", "Anak-anak", "Laki-laki"], correctIndex: 2 },
-  { id: 12, question: "Barisan makmum di belakang imam, lurus dan rapat disebut…", options: ["Muwafik", "Masbuk", "Saf"], correctIndex: 2 },
-  { id: 13, question: "Saf paling utama bagi makmum laki-laki dewasa adalah…", options: ["Paling depan", "Tengah", "Paling belakang"], correctIndex: 0 },
-  { id: 14, question: "Muadzin mengumandangkan… saat imam telah siap", options: ["Doa", "Ikamah", "Shalawat"], correctIndex: 1 },
-  { id: 15, question: "Imam dan makmum salat berjamaah berada di…", options: ["Tempat berbeda", "Satu tempat", "Tempat terbuka"], correctIndex: 1 },
-  { id: 16, question: "Orang yang meninggalkan salat berjamaah termasuk…", options: ["Beruntung", "Bahagia", "Merugi"], correctIndex: 2 },
-  { id: 17, question: "Makmum anak Perempuan berdiri di… Makmum Perempuan dewasa", options: ["Depan", "Belakang", "Samping"], correctIndex: 0 },
-  { id: 18, question: "Perhatikan gambar barisan salat berikut. Siapakah sebutan untuk orang yang berada di posisi paling depan dan memimpin salat berjamaah?", image: "images/Picture21.jpg", options: ["Muazin", "Imam", "Khatib"], correctIndex: 1 },
-  { id: 19, question: "Perhatikan gambar berikut. Yang baru datang biasanya disebut apa?", image: "images/Picture22.jpg", options: ["Muwafiq", "Munfarid", "Masbuq"], correctIndex: 2 },
-  { id: 20, question: "Pahala orang yang melaksanakan salat berjamaah berapa darajat…", options: ["17", "27", "37"], correctIndex: 1 },
-  { id: 21, question: "Saf yang terputus dalam salat berjamaah akan diisi oleh…", options: ["Malaikat", "Setan", "Hewan"], correctIndex: 1 }
+  // BAB 2 — Salat Berjamaah
+  { id: 11, bab: 2, question: "Orang yang memimpin salat berjamaah di masjid dari golongan?", options: ["Perempuan", "Anak-anak", "Laki-laki"], correctIndex: 2 },
+  { id: 12, bab: 2, question: "Barisan makmum di belakang imam, lurus dan rapat disebut…", options: ["Muwafik", "Masbuk", "Saf"], correctIndex: 2 },
+  { id: 13, bab: 2, question: "Saf paling utama bagi makmum laki-laki dewasa adalah…", options: ["Paling depan", "Tengah", "Paling belakang"], correctIndex: 0 },
+  { id: 14, bab: 2, question: "Muadzin mengumandangkan… saat imam telah siap", options: ["Doa", "Ikamah", "Shalawat"], correctIndex: 1 },
+  { id: 15, bab: 2, question: "Imam dan makmum salat berjamaah berada di…", options: ["Tempat berbeda", "Satu tempat", "Tempat terbuka"], correctIndex: 1 },
+  { id: 16, bab: 2, question: "Orang yang meninggalkan salat berjamaah termasuk…", options: ["Beruntung", "Bahagia", "Merugi"], correctIndex: 2 },
+  { id: 17, bab: 2, question: "Makmum anak Perempuan berdiri di… Makmum Perempuan dewasa", options: ["Depan", "Belakang", "Samping"], correctIndex: 0 },
+  { id: 18, bab: 2, question: "Perhatikan gambar barisan salat berikut. Siapakah sebutan untuk orang yang berada di posisi paling depan dan memimpin salat berjamaah?", image: "images/Picture21.jpg", options: ["Muazin", "Imam", "Khatib"], correctIndex: 1 },
+  { id: 19, bab: 2, question: "Perhatikan gambar berikut. Yang baru datang biasanya disebut apa?", image: "images/Picture22.jpg", options: ["Muwafiq", "Munfarid", "Masbuq"], correctIndex: 2 },
+  { id: 20, bab: 2, question: "Pahala orang yang melaksanakan salat berjamaah berapa darajat…", options: ["17", "27", "37"], correctIndex: 1 },
+  { id: 21, bab: 2, question: "Saf yang terputus dalam salat berjamaah akan diisi oleh…", options: ["Malaikat", "Setan", "Hewan"], correctIndex: 1 }
 ];
 
 const quizEssay = [
   // BAB 1
-  { id: 1, question: "Ada berapakah salat fardhu yang wajib dilakukan?", answer: "5 salat fardhu" },
-  { id: 2, question: "Jumlah rakat salat subuh berapa rakaat?", answer: "2 rakaat" },
-  { id: 3, question: "Bagaimana gerakan takbiratulihram yang benar?", answer: "mengangkat kedua tangan sejajar dengan Pundak" },
+  { id: 1, bab: 1, question: "Ada berapakah salat fardhu yang wajib dilakukan?", answer: "5 salat fardhu" },
+  { id: 2, bab: 1, question: "Jumlah rakat salat subuh berapa rakaat?", answer: "2 rakaat" },
+  { id: 3, bab: 1, question: "Bagaimana gerakan takbiratulihram yang benar?", answer: "mengangkat kedua tangan sejajar dengan Pundak" },
   // BAB 2
-  { id: 4, question: "Kapan kita dapat melakukan salat berjamaah?", answer: "ketika terdapat Imam dan makmum" },
-  { id: 5, question: "Salat berjamaah mencontoh perbuatan Nabi…", answer: "Nabi Muhammad" },
-  { id: 6, question: "Jika imam batal maka tugas makmum harus…", answer: "menggantinya" }
+  { id: 4, bab: 2, question: "Kapan kita dapat melakukan salat berjamaah?", answer: "ketika terdapat Imam dan makmum" },
+  { id: 5, bab: 2, question: "Salat berjamaah mencontoh perbuatan Nabi…", answer: "Nabi Muhammad" },
+  { id: 6, bab: 2, question: "Jika imam batal maka tugas makmum harus…", answer: "menggantinya" }
 ];
 
 const praktikInfo = {

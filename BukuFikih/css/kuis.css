@@ -445,65 +445,114 @@ header.container p {
   fill: currentColor;
 }
 
-/* ===== Quiz Navigation Grid & Buttons (One Question at a Time) ===== */
+/* ===== Quiz Navigation Grid grouped by Bab (Modern Layout) ===== */
+.quiz-nav-grid-grouped {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.75rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(245, 247, 250, 0.6));
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(91, 155, 213, 0.15);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.015);
+}
+
+.quiz-bab-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.quiz-bab-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+}
+
+.quiz-bab-label .bab-badge {
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: white;
+  background: linear-gradient(135deg, var(--color-blue-500), var(--color-blue-700));
+  padding: 0.25rem 0.65rem;
+  border-radius: 50px;
+  letter-spacing: 0.75px;
+  box-shadow: 0 2px 8px rgba(37, 99, 160, 0.25);
+}
+
+.quiz-bab-label .bab-text {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--color-blue-900);
+}
+
 .quiz-nav-grid {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.4);
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  background: white;
   border-radius: var(--radius-xl);
-  border: 1.5px solid rgba(91, 155, 213, 0.1);
+  border: 1px solid rgba(91, 155, 213, 0.08);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 0;
 }
 
 .nav-grid-item {
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 50%;
-  border: 1.5px solid var(--color-blue-200);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 12px; /* Premium rounded-squares instead of plain circles */
+  border: 2px solid var(--color-blue-50);
   background: white;
   color: var(--color-blue-800);
-  font-weight: 700;
-  font-size: 0.9rem;
+  font-weight: 800;
+  font-size: 0.95rem;
   font-family: var(--font-sans);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  transition: all 0.25s var(--ease-spring);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.015);
 }
 
 .nav-grid-item:hover {
   background: var(--color-blue-50);
-  border-color: var(--color-blue-400);
-  transform: scale(1.05);
+  border-color: var(--color-blue-300);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 10px rgba(91, 155, 213, 0.15);
 }
 
 .nav-grid-item.active {
-  background: var(--color-blue-600) !important;
+  background: linear-gradient(135deg, var(--color-blue-400), var(--color-blue-600)) !important;
   color: white !important;
-  border-color: var(--color-blue-600) !important;
+  border-color: transparent !important;
   box-shadow: var(--shadow-glow);
+  transform: translateY(-2px) scale(1.08);
 }
 
 .nav-grid-item.answered {
-  background: var(--color-blue-100);
-  border-color: var(--color-blue-400);
+  background: var(--color-blue-50);
+  border-color: var(--color-blue-200);
   color: var(--color-blue-900);
 }
 
 .nav-grid-item.correct {
-  background: var(--color-green-400) !important;
+  background: linear-gradient(135deg, #66BB6A, #43A047) !important;
   color: white !important;
-  border-color: var(--color-green-500) !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3) !important;
 }
 
 .nav-grid-item.wrong {
-  background: var(--color-red-400) !important;
+  background: linear-gradient(135deg, #EF5350, #E53935) !important;
   color: white !important;
-  border-color: var(--color-red-500) !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(239, 83, 80, 0.3) !important;
 }
 
 .quiz-sticky-nav {
