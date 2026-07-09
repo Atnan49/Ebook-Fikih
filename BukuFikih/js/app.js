@@ -93,7 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const storedDyslexia = localStorage.getItem('dyslexiaMode');
         const storedTts = localStorage.getItem('ttsEnabled');
 
-        if (storedSlide !== null) currentSlideIndex = parseInt(storedSlide, 10);
+        if (storedSlide !== null) {
+            currentSlideIndex = parseInt(storedSlide, 10);
+            if (currentSlideIndex >= slides.length) {
+                currentSlideIndex = 0;
+            }
+        }
         if (storedFontScale !== null) fontScale = parseInt(storedFontScale, 10);
         if (storedDyslexia !== null) dyslexiaMode = storedDyslexia === 'true';
         if (storedTts !== null) ttsEnabled = storedTts === 'true';
