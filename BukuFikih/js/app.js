@@ -692,7 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (seg.type === 'arabic') {
                 // Selalu utamakan Google Translate TTS API (sangat stabil & natural)
                 console.log("Playing Arabic block via Google Translate TTS API...");
-                const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ar&client=tw-ob&q=${encodeURIComponent(txt)}`;
+                const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&tl=ar&client=gtx&q=${encodeURIComponent(txt)}`;
                 
                 if (ttsAudioElement) {
                     let fallbackTriggered = false;
@@ -703,21 +703,28 @@ document.addEventListener('DOMContentLoaded', () => {
                         fallbackTriggered = true;
                         console.warn("Hadis Arabic fallback triggered due to:", reason);
 
-                        const utterance = new SpeechSynthesisUtterance(txt);
                         const arabicVoice = getVoiceForLang('ar-SA');
-                        if (arabicVoice) utterance.voice = arabicVoice;
-                        utterance.lang = 'ar-SA';
-                        utterance.rate = 0.70;
-                        utterance.onend = () => {
-                            arabicPlayedSuccessfully = true;
-                            playNext();
-                        };
-                        utterance.onerror = () => {
+                        if (arabicVoice) {
+                            const utterance = new SpeechSynthesisUtterance(txt);
+                            utterance.voice = arabicVoice;
+                            utterance.lang = 'ar-SA';
+                            utterance.rate = 0.70;
+                            utterance.onend = () => {
+                                arabicPlayedSuccessfully = true;
+                                playNext();
+                            };
+                            utterance.onerror = () => {
+                                arabicPlayedSuccessfully = false;
+                                playNext();
+                            };
+                            currentUtterances = [utterance];
+                            window.speechSynthesis.speak(utterance);
+                        } else {
+                            // Jika perangkat tidak mendukung suara Arab, langsung lompat ke terjemahan Bahasa Indonesia instan
+                            console.log("Arabic voice (ar-SA) not supported. Skipping directly to Indonesian translation.");
                             arabicPlayedSuccessfully = false;
                             playNext();
-                        };
-                        currentUtterances = [utterance];
-                        window.speechSynthesis.speak(utterance);
+                        }
                     };
 
                     const cleanup = () => {
@@ -733,7 +740,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
                     ttsAudioElement.onerror = () => {
                         cleanup();
-                        triggerHadisFallback("audio element error event");
+                        const err = ttsAudioElement.error;
+                        const errMsg = err ? `Code ${err.code}: ${err.message}` : "unknown";
+                        triggerHadisFallback("audio element error event - details: " + errMsg);
                     };
                     
                     ttsAudioElement.src = url;
@@ -742,22 +751,28 @@ document.addEventListener('DOMContentLoaded', () => {
                         triggerHadisFallback("play promise catch: " + err.message);
                     });
                 } else {
-                    // Fallback langsung ke Web Speech API jika tidak ada ttsAudioElement
-                    const utterance = new SpeechSynthesisUtterance(txt);
+                    // Fallback langsung jika tidak ada ttsAudioElement
                     const arabicVoice = getVoiceForLang('ar-SA');
-                    if (arabicVoice) utterance.voice = arabicVoice;
-                    utterance.lang = 'ar-SA';
-                    utterance.rate = 0.70;
-                    utterance.onend = () => {
-                        arabicPlayedSuccessfully = true;
-                        playNext();
-                    };
-                    utterance.onerror = () => {
+                    if (arabicVoice) {
+                        const utterance = new SpeechSynthesisUtterance(txt);
+                        utterance.voice = arabicVoice;
+                        utterance.lang = 'ar-SA';
+                        utterance.rate = 0.70;
+                        utterance.onend = () => {
+                            arabicPlayedSuccessfully = true;
+                            playNext();
+                        };
+                        utterance.onerror = () => {
+                            arabicPlayedSuccessfully = false;
+                            playNext();
+                        };
+                        currentUtterances = [utterance];
+                        window.speechSynthesis.speak(utterance);
+                    } else {
+                        console.log("No audio element and Arabic voice not supported. Skipping directly to Indonesian translation.");
                         arabicPlayedSuccessfully = false;
                         playNext();
-                    };
-                    currentUtterances = [utterance];
-                    window.speechSynthesis.speak(utterance);
+                    }
                 }
             } else {
                 // Untuk selain arab (intro, translation, dll), reset flag arabicPlayedSuccessfully
