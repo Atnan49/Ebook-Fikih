@@ -245,19 +245,21 @@ document.addEventListener('DOMContentLoaded', () => {
             // Apply cover slide theme
             slideCard.classList.add('cover-slide');
             
+            const cleanTitle = slide.title.replace(/^BAB [IVXLCDM\d]+:\s*/i, '');
+            
             // Generate HTML cover slide
             let coverHTML = `
-                <div class="space-y-6 py-4 relative z-10" style="display: flex; flex-direction: column; gap: 1.25rem; align-items: center; justify-content: center; width: 100%; min-height: 100%;">
-                    <div class="bab-pill-container">
+                <div class="cover-content relative z-10 animate-fade-in">
+                    <div class="bab-pill-container" style="margin-bottom: 0.5rem;">
                         <span class="bab-pill">📖 BAB ${slide.bab}</span>
                     </div>
-                    <h2 class="slide-title" style="border: none; margin: 0; padding: 0;">${slide.title.replace(/^BAB [IVXLCDM\d]+:\s*/i, '')}</h2>
-                    <div style="width: 5rem; height: 3px; background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent); margin: 0 auto;"></div>
+                    <h2 class="cover-main-title">${cleanTitle}</h2>
+                    <div class="cover-divider" style="margin: 1.25rem auto;"></div>
             `;
             
             if (slide.image) {
                 coverHTML += `
-                    <div class="slide-image-wrapper animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="slide-image-wrapper animate-fade-in-up" style="animation-delay: 0.1s; margin-bottom: 1.25rem;">
                         <div class="relative-wrap">
                             <img src="${slide.image}" alt="${slide.title}" class="slide-img" />
                         </div>
@@ -265,12 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             }
             
-            coverHTML += `<div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">`;
+            // Loop through content and only display non-duplicated content (e.g. description text)
+            coverHTML += `<div class="cover-body" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem;">`;
             slide.content.forEach(block => {
-                if (block.type === 'heading') {
-                    coverHTML += `<h3 class="block-heading" style="color: white; margin: 0;">${block.content}</h3>`;
-                } else {
-                    coverHTML += `<p class="block-text" style="color: rgba(255,255,255,0.95); margin: 0;">${block.content}</p>`;
+                if (block.type !== 'heading') {
+                    coverHTML += `<p class="cover-description">${block.content}</p>`;
                 }
             });
             coverHTML += `</div>`;
