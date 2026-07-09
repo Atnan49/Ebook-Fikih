@@ -527,8 +527,17 @@ document.addEventListener('DOMContentLoaded', () => {
         slide.content.forEach(block => {
             switch(block.type) {
                 case 'arabic':
-                    // Jika ini adalah ayat Quran (memiliki metadata block.surah & block.ayahs)
-                    if (block.surah && block.ayahs) {
+                    // Jika ada pre-rendered audio lokal (misal untuk Hadis offline), putar langsung
+                    if (block.audio) {
+                        segments.push({
+                            type: 'arabic-quran',
+                            text: block.audio,
+                            lang: 'ar-SA',
+                            audioStart: block.audioStart,
+                            audioEnd: block.audioEnd
+                        });
+                    } else if (block.surah && block.ayahs) {
+                        // Jika ini adalah ayat Quran (memiliki metadata block.surah & block.ayahs)
                         block.ayahs.forEach(ayah => {
                             const pad = (num, size) => ('000' + num).slice(-size);
                             const quranAudioUrl = `https://verses.quran.foundation/Alafasy/mp3/${pad(block.surah, 3)}${pad(ayah, 3)}.mp3`;

@@ -91,7 +91,8 @@ const slides = [
         "type": "arabic",
         "content": "وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ وَارْكَعُوا مَعَ الرَّاكِعِينَ",
         "surah": 2,
-        "ayahs": [43]
+        "ayahs": [43],
+        "audio": "audio/quran_2_43.mp3"
       },
       {
         "type": "translation",
@@ -103,7 +104,8 @@ const slides = [
       },
       {
         "type": "arabic",
-        "content": "صَلُّوْا كَمَا رَأَيْتُمُوْنِي أُصَلِّي"
+        "content": "صَلُّوْا كَمَا رَأَيْتُمُوْنِي أُصَلِّي",
+        "audio": "audio/hadis_shollu.mp3"
       },
       {
         "type": "translation",
@@ -384,7 +386,8 @@ const slides = [
         "type": "arabic",
         "content": "وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ وَارْكَعُوا مَعَ الرَّاكِعِينَ",
         "surah": 2,
-        "ayahs": [43]
+        "ayahs": [43],
+        "audio": "audio/quran_2_43.mp3"
       },
       {
         "type": "translation",
