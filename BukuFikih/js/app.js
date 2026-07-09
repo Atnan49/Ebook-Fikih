@@ -550,10 +550,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Jika ini adalah ayat Quran (memiliki metadata block.surah & block.ayahs)
                     if (block.surah && block.ayahs) {
                         block.ayahs.forEach(ayah => {
-                            const globalAyah = getGlobalAyahNumber(block.surah, ayah);
+                            const pad = (num, size) => ('000' + num).slice(-size);
+                            const quranAudioUrl = `https://verses.quran.foundation/Alafasy/mp3/${pad(block.surah, 3)}${pad(ayah, 3)}.mp3`;
                             segments.push({
                                 type: 'arabic-quran',
-                                text: `https://cdn.islamic.network/quran/audio/128/ar.alafasy/${globalAyah}.mp3`,
+                                text: quranAudioUrl,
                                 lang: 'ar-SA',
                                 audioStart: block.audioStart,
                                 audioEnd: block.audioEnd
