@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobilePagePill = document.getElementById('mobile-page-pill');
     const progressFill = document.getElementById('progress-fill');
     const progressText = document.getElementById('progress-text');
-    
+
     // Toolbar elements
     const btnDecFont = document.getElementById('btn-dec-font');
     const btnIncFont = document.getElementById('btn-inc-font');
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnIncFontMobile = document.getElementById('btn-inc-font-mobile');
     const fontScaleTextMobile = document.getElementById('font-scale-text-mobile');
     const btnToggleDyslexiaMobile = document.getElementById('btn-toggle-dyslexia-mobile');
-    
+
     // TTS elements
     const ttsActiveBar = document.getElementById('tts-active-bar');
     const btnTtsStop = document.getElementById('btn-tts-stop');
@@ -139,20 +139,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Navigation Logic =====
     function goToSlide(index) {
         if (index < 0 || index >= slides.length) return;
-        
+
         // Handle transitions direction class
         const directionClass = index > currentSlideIndex ? 'animate-slide-right' : 'animate-slide-left';
-        
+
         currentSlideIndex = index;
         localStorage.setItem('currentSlideIndex', currentSlideIndex);
-        
+
         // Stop current speech before navigating
         stopSpeaking();
-        
+
         // Render & animate slide
         renderSlide(currentSlideIndex, directionClass);
         updateProgress();
-        
+
         // Trigger TTS if enabled
         if (ttsEnabled) {
             speakCurrentSlide();
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update Progress Bar
         const percent = ((currentSlideIndex + 1) / slides.length) * 100;
         progressFill.style.width = `${percent}%`;
-        
+
         // Update Progress Indicator text
         const pageText = `${currentSlideIndex + 1} / ${slides.length}`;
         progressText.textContent = pageText;
@@ -236,17 +236,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderSlide(index, animationClass = 'animate-fade-in') {
         const slide = slides[index];
         const currentBab = babInfo.find(b => b.bab === slide.bab);
-        
+
         // Clear card content and classes
         slideCard.innerHTML = '';
         slideCard.className = `slide-card-container ${animationClass}`;
-        
+
         if (slide.isCover) {
             // Apply cover slide theme
             slideCard.classList.add('cover-slide');
-            
+
             const cleanTitle = slide.title.replace(/^BAB [IVXLCDM\d]+:\s*/i, '');
-            
+
             // Generate HTML cover slide
             let coverHTML = `
                 <div class="cover-content relative z-10 animate-fade-in">
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h2 class="cover-main-title">${cleanTitle}</h2>
                     <div class="cover-divider" style="margin: 1.25rem auto;"></div>
             `;
-            
+
             if (slide.image) {
                 coverHTML += `
                     <div class="slide-image-wrapper animate-fade-in-up" style="animation-delay: 0.1s; margin-bottom: 1.25rem;">
@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
             }
-            
+
             // Loop through content and only display non-duplicated content (e.g. description text)
             coverHTML += `<div class="cover-body" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem;">`;
             slide.content.forEach(block => {
@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             coverHTML += `</div>`;
-            
+
             coverHTML += `
                     <div class="cover-footer-text">
                         Tekan tombol "Lanjut" untuk mulai belajar 👉
@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Apply standard slide theme
             slideCard.classList.add('glass-card-strong');
-            
+
             // Build standard headers
             let slideHTML = `
                 <div class="bab-pill-container">
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <h2 class="slide-title">${slide.title}</h2>
             `;
-            
+
             if (slide.image) {
                 slideHTML += `
                     <div class="slide-image-wrapper animate-fade-in-up" style="animation-delay: 0.1s;">
@@ -302,14 +302,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 `;
             }
-            
+
             // Render blocks
             slideHTML += `<div style="display: flex; flex-direction: column; gap: 0.5rem;">`;
             slide.content.forEach((block, idx) => {
                 slideHTML += renderBlock(block, idx);
             });
             slideHTML += `</div>`;
-            
+
             slideCard.innerHTML = slideHTML;
         }
 
@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Helper function to render a single block
     function renderBlock(block, idx) {
         const delayStyle = `style="animation-delay: ${idx * 0.05}s"`;
-        
+
         switch (block.type) {
             case 'heading':
                 return `<h3 class="block-heading animate-fade-in" ${delayStyle}>${block.content}</h3>`;
@@ -374,15 +374,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Sidebar TOC Logic =====
     function buildSidebarTOC() {
         tocContainer.innerHTML = '';
-        
+
         babInfo.forEach(bab => {
             const section = document.createElement('div');
             section.className = 'toc-bab-section';
             section.innerHTML = `<h4 class="toc-bab-title">BAB ${bab.bab}: ${bab.title}</h4>`;
-            
+
             const list = document.createElement('ul');
             list.className = 'toc-list';
-            
+
             const babSlides = slides.filter(s => s.bab === bab.bab);
             babSlides.forEach(slide => {
                 const item = document.createElement('li');
@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.appendChild(btn);
                 list.appendChild(item);
             });
-            
+
             section.appendChild(list);
             tocContainer.appendChild(section);
         });
@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!('speechSynthesis' in window)) return null;
         const voices = window.speechSynthesis.getVoices();
         const lc = langCode.toLowerCase();
-        
+
         // 1. Exact match (e.g. 'ar-SA' -> 'ar-SA')
         let matched = voices.find(v => {
             if (!v.lang) return false;
@@ -469,7 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return vLang === lc || vLang.replace('_', '-') === lc;
         });
         if (matched) return matched;
-        
+
         // 2. Prefix match (e.g. 'ar-SA' -> 'ar')
         const langPrefix = lc.split('-')[0];
         matched = voices.find(v => {
@@ -497,7 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stopSpeaking();
         const sessionId = currentTtsSessionId;
         if (!('speechSynthesis' in window)) return;
-        
+
         // Coba pre-unlock audio element dalam konteks user gesture (misal saat klik tombol ini)
         if (ttsAudioElement) {
             try {
@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const slide = slides[currentSlideIndex];
         const segments = [];
-        
+
         // 1. Slide Intro
         segments.push({
             type: 'intro',
@@ -525,7 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 2. Content Blocks
         slide.content.forEach(block => {
-            switch(block.type) {
+            switch (block.type) {
                 case 'arabic':
                     // Jika ada pre-rendered audio lokal (misal untuk Hadis offline), putar langsung
                     if (block.audio) {
@@ -588,7 +588,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (item.includes('lafaz-arabic')) {
                             const arMatch = item.match(/class=["']lafaz-arabic["'][^>]*>([^<]+)<\/span>/);
                             const latMatch = item.match(/class=["']lafaz-latin["'][^>]*>([^<]+)<\/span>/);
-                            
+
                             if (arMatch && arMatch[1]) {
                                 let arText = arMatch[1].trim();
                                 // ponytail: repeat the Arabic text twice if (2x) is present in the Latin transliteration
@@ -629,7 +629,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ttsActiveBar.style.display = 'none';
                 return;
             }
-            
+
             const seg = segments[currentIndex];
             currentIndex++;
 
@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     ttsAudioElement.addEventListener('timeupdate', ttsAudioElement._onTimeUpdate);
                     ttsAudioElement.src = seg.text;
-                    
+
                     ttsAudioElement.onended = () => {
                         cleanup();
                         arabicPlayedSuccessfully = true;
@@ -702,7 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Selalu utamakan Google Translate TTS API (sangat stabil & natural)
                 console.log("Playing Arabic block via Google Translate TTS API...");
                 const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&tl=ar&client=gtx&q=${encodeURIComponent(txt)}`;
-                
+
                 if (ttsAudioElement) {
                     let fallbackTriggered = false;
 
@@ -753,7 +753,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const errMsg = err ? `Code ${err.code}: ${err.message}` : "unknown";
                         triggerHadisFallback("audio element error event - details: " + errMsg);
                     };
-                    
+
                     ttsAudioElement.src = url;
                     ttsAudioElement.play().catch(err => {
                         cleanup();
@@ -884,7 +884,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Event Listeners setup =====
     btnPrev.addEventListener('click', prevSlide);
     // ponytail: next button action is handled dynamically via .onclick in updateProgress() to support kuis redirect on last page.
-    
+
     // Zoom Teks (Desktop)
     btnDecFont.addEventListener('click', () => {
         if (fontScale > 100) {
@@ -892,7 +892,7 @@ document.addEventListener('DOMContentLoaded', () => {
             applyFontScale();
         }
     });
-    
+
     btnIncFont.addEventListener('click', () => {
         if (fontScale < 160) {
             fontScale += 10;
