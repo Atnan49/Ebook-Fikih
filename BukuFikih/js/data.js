@@ -13,7 +13,7 @@ const slides = [
     "bab": 1,
     "subBab": "Pendahuluan",
     "title": "BAB I: Memahami Ketentuan Shalat fardhu",
-    "image": "",
+    "image": "images/cover_bab_satu.png",
     "isCover": true,
     "content": [
       {
@@ -331,7 +331,7 @@ const slides = [
     "bab": 2,
     "subBab": "Pendahuluan",
     "title": "BAB II: Mendirikan Salat Berjamaah",
-    "image": "",
+    "image": "images/cover_bab_dua.png",
     "isCover": true,
     "content": [
       {
