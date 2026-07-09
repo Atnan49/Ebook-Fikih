@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Book Fikih Interaktif</title>
+    <!-- Google Fonts: Inter (Latin) & Amiri (Arabic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Link CSS Utama -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/ebook.css">
+</head>
+
+<body class="bg-pattern">
+
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
+        <div class="shape-3"></div>
+    </div>
+
+    <!-- Sticky Header & Toolbar -->
+    <header class="sticky-header">
+        <div id="udl-toolbar" class="toolbar-container" style="border: none; background: transparent; box-shadow: none; position: static; padding: 0.5rem 1rem;">
+            <div class="toolbar-inner">
+                <!-- Back Link Chevron -->
+                <a href="index.html" class="back-link" title="Kembali ke Beranda">
+                    <svg class="chevron-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    <span>Beranda</span>
+                </a>
+                
+                <div class="toolbar-right" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <!-- DESKTOP CONTROLS (inline) -->
+                    <div class="desktop-controls">
+                        <!-- Font Size Controls -->
+                        <button id="btn-dec-font" class="btn-tool" title="Perkecil Teks">A-</button>
+                        <span id="font-scale-text" class="font-scale-value">100%</span>
+                        <button id="btn-inc-font" class="btn-tool" title="Perbesar Teks">A+</button>
+                        
+                        <div class="toolbar-divider"></div>
+                        
+                        <!-- Dyslexia Mode Toggle -->
+                        <button id="btn-toggle-dyslexia" class="btn-tool" style="width: auto; padding: 0 0.5rem;" title="Toggle Font Disleksia">Disleksia</button>
+                        
+                        <div class="toolbar-divider"></div>
+                    </div>
+                    
+                    <!-- MOBILE CONTROLS (Gear popover dropdown) -->
+                    <div class="mobile-controls">
+                        <button id="btn-settings-mobile" class="btn-tool" title="Pengaturan Tampilan">⚙️</button>
+                        
+                        <!-- Settings Backdrop -->
+                        <div id="settings-backdrop" class="settings-backdrop"></div>
+                        
+                        <!-- Settings Dropdown Popover -->
+                        <div id="settings-dropdown" class="settings-dropdown glass-card-strong shadow-xl">
+                            <h4 class="settings-dropdown-header">Pengaturan Tampilan</h4>
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <!-- Font size row -->
+                                <div class="settings-row">
+                                    <span class="settings-label">Ukuran Huruf</span>
+                                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.25rem;">
+                                        <button id="btn-dec-font-mobile" class="btn-tool" style="width: 2rem; height: 2rem;">A-</button>
+                                        <span id="font-scale-text-mobile" class="font-scale-value" style="font-size: 0.75rem;">100%</span>
+                                        <button id="btn-inc-font-mobile" class="btn-tool" style="width: 2rem; height: 2rem;">A+</button>
+                                    </div>
+                                </div>
+                                <!-- Dyslexia row -->
+                                <div class="switch-container">
+                                    <div class="switch-label-group">
+                                        <span class="switch-label">Font Disleksia</span>
+                                        <span class="switch-sublabel">Ramah disleksia</span>
+                                    </div>
+                                    <button id="btn-toggle-dyslexia-mobile" class="switch-btn">
+                                        <div class="switch-circle"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="toolbar-divider"></div>
+                    </div>
+                    
+                    <!-- Shared Audio Toggle -->
+                    <button id="btn-toggle-audio" class="btn-tool" title="Toggle Audio Bacaan">🔇</button>
+                    
+                    <div class="toolbar-divider"></div>
+                    
+                    <!-- TOC Button -->
+                    <button id="btn-open-sidebar" class="btn-tool" title="Daftar Isi">☰</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Bar Row -->
+        <div style="max-width: 800px; width: 100%; margin: 0 auto; padding: 0 1rem 0.5rem 1rem;">
+            <div class="progress-container">
+                <div class="progress-bar-bg">
+                    <div id="progress-fill" class="progress-bar-fill"></div>
+                </div>
+                <span id="progress-text" class="progress-text">1/25</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- TTS Active Status Bar -->
+    <div id="tts-active-bar" class="tts-status-bar" style="display: none;">
+        <span>🔊 Sedang membacakan...</span>
+        <button id="btn-tts-stop" class="btn-tts-stop">Berhenti</button>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- Sidebar Daftar Isi (TOC) -->
+    <aside id="sidebar-toc" class="sidebar">
+        <div class="sidebar-header">
+            <h3 class="sidebar-title">Daftar Isi</h3>
+            <button id="close-sidebar">✕</button>
+        </div>
+        <div class="sidebar-content" id="toc-container">
+            <!-- Daftar isi diisi otomatis dari JS -->
+        </div>
+    </aside>
+
+    <!-- Main Container Flipbook -->
+    <main class="ebook-container" style="z-index: 10;">
+        <!-- Slide Card -->
+        <div id="slide-card" class="slide-card-container">
+            <!-- Konten slide dimuat dinamis dari data.js -->
+        </div>
+    </main>
+
+    <!-- Sticky Navigation Bar at Bottom -->
+    <nav class="sticky-nav">
+        <div class="nav-inner">
+            <button id="btn-prev" class="btn-cream" style="align-items: center;">
+                <svg style="width: 1rem; height: 1rem; flex-shrink: 0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+                <span class="hidden-xs">Sebelumnya</span>
+                <span class="visible-xs">Kembali</span>
+            </button>
+            
+            <!-- Dots Container -->
+            <div id="dots-container" class="dots-container"></div>
+            
+            <!-- Mobile Page Pill -->
+            <div id="mobile-page-pill" class="mobile-page-pill">1 / 25</div>
+            
+            <button id="btn-next" class="btn-primary" style="align-items: center;">
+                <!-- Content set dynamically in app.js -->
+            </button>
+        </div>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
