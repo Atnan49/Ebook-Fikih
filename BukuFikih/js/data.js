@@ -10,7 +10,7 @@
 const slides = [
   // BAB I: Memahami Ketentuan Shalat fardhu
   {
-    id: 1, bab: 1, subBab: "Pendahuluan", title: "BAB I: Memahami Ketentuan Shalat fardhu", image: "images/Picture1.jpg", isCover: true,
+    id: 1, bab: 1, subBab: "Pendahuluan", title: "BAB I: Memahami Ketentuan Shalat fardhu", image: "", isCover: true,
     content: [
       { type: "heading", content: "Mari kita belajar tentang shalat fardhu" },
       { type: "text", content: "Tahukah kalian ibadah pokok umat Islam? Apakah kalian mengerjakan? Ibadah pokok umat Islam adalah shalat." },
@@ -18,7 +18,7 @@ const slides = [
     ]
   },
   {
-    id: 2, bab: 1, subBab: "Pengertian Shalat Fardhu", title: "Fakta Penting Tentang Salat", image: "images/Picture2.jpg",
+    id: 2, bab: 1, subBab: "Pengertian Shalat Fardhu", title: "Fakta Penting Tentang Salat", image: "images/Picture1.jpg",
     content: [
       { type: "list", content: "Fakta Penting:", items: [
         "Salat artinya doa.",
@@ -32,7 +32,7 @@ const slides = [
     ]
   },
   {
-    id: 3, bab: 1, subBab: "Pengertian Shalat Fardhu", title: "Perintah Shalat", image: "images/Picture3.jpg",
+    id: 3, bab: 1, subBab: "Pengertian Shalat Fardhu", title: "Perintah Shalat", image: "images/Picture2.jpg",
     content: [
       { type: "text", content: "Perintah salat berasal dari Allah Swt. Perintah itu ada di dalam Al-Qur'an." },
       { type: "heading", content: "Surah Al-Baqarah Ayat 43" },
@@ -45,7 +45,7 @@ const slides = [
     ]
   },
   {
-    id: 4, bab: 1, subBab: "Ketentuan Shalat Fardhu", title: "Syarat Wajib Salat", image: "images/Picture4.jpg",
+    id: 4, bab: 1, subBab: "Ketentuan Shalat Fardhu", title: "Syarat Wajib Salat", image: "images/Picture3.jpg",
     content: [
       { type: "text", content: "Syarat sebelum wajib mengerjakan salat." },
       { type: "list", content: "Syarat Wajib:", items: [
@@ -58,7 +58,7 @@ const slides = [
     ]
   },
   {
-    id: 5, bab: 1, subBab: "Ketentuan Shalat Fardhu", title: "Syarat Sah Salat", image: "images/Picture5.jpg",
+    id: 5, bab: 1, subBab: "Ketentuan Shalat Fardhu", title: "Syarat Sah Salat", image: "images/Picture4.png",
     content: [
       { type: "text", content: "Syarat agar salat kita sah." },
       { type: "list", content: "Syarat Sah:", items: [
@@ -72,7 +72,7 @@ const slides = [
     ]
   },
   {
-    id: 6, bab: 1, subBab: "Ketentuan Shalat Fardhu", title: "Rukun Salat", image: "images/Picture6.jpg",
+    id: 6, bab: 1, subBab: "Ketentuan Shalat Fardhu", title: "Rukun Salat", image: "images/Picture5.jpg",
     content: [
       { type: "text", content: "Gerakan dan bacaan yang wajib dikerjakan." },
       { type: "list", content: "Rukun Salat (a-g):", items: [
@@ -96,7 +96,7 @@ const slides = [
     ]
   },
   {
-    id: 7, bab: 1, subBab: "Ketentuan Shalat Fardhu", title: "Sunah Kauli dan Fikli", image: "images/Picture7.jpg",
+    id: 7, bab: 1, subBab: "Ketentuan Shalat Fardhu", title: "Sunah Kauli dan Fikli", image: "images/Picture6.jpg",
     content: [
       { type: "list", content: "A. Sunah Kauli (Bacaan):", items: [
         "Membaca doa iftitah.",
@@ -117,7 +117,7 @@ const slides = [
     ]
   },
   {
-    id: 8, bab: 1, subBab: "Ketentuan Shalat Fardhu", title: "Salat Menjadi Batal", image: "images/Picture8.jpg",
+    id: 8, bab: 1, subBab: "Ketentuan Shalat Fardhu", title: "Salat Menjadi Batal", image: "images/Picture7.png",
     content: [
       { type: "text", content: "Salat menjadi batal (tidak sah) jika terjadi hal berikut:" },
       { type: "list", content: "Hal-hal yang membatalkan salat:", items: [
@@ -136,7 +136,7 @@ const slides = [
     ]
   },
   {
-    id: 9, bab: 1, subBab: "Waktu dan bilangan", title: "Salat Fardu", image: "images/Picture9.jpg",
+    id: 9, bab: 1, subBab: "Waktu dan bilangan", title: "Salat Fardu", image: "images/Picture8.jpg",
     content: [
       { type: "text", content: "Ada lima waktu dalam sehari semalam." },
       { type: "list", content: "Waktu dan Bilangan:", items: [
@@ -150,7 +150,7 @@ const slides = [
     ]
   },
   {
-    id: 10, bab: 1, subBab: "Hikmah Mengerjakan", title: "Hikmah Mengerjakan Salat dengan Tertib", image: "images/Picture10.jpg",
+    id: 10, bab: 1, subBab: "Hikmah Mengerjakan", title: "Hikmah Mengerjakan Salat dengan Tertib", image: "images/Picture9.jpg",
     content: [
       { type: "text", content: "Salat yang dilakukan dengan tertib membawa banyak kebaikan dalam kehidupan." },
       { type: "list", content: "Hikmah Salat:", items: [
@@ -166,7 +166,7 @@ const slides = [
   },
   // BAB II: Mendirikan Salat Berjamaah
   {
-    id: 11, bab: 2, subBab: "Pendahuluan", title: "BAB II: Mendirikan Salat Berjamaah", image: "images/Picture11.jpg", isCover: true,
+    id: 11, bab: 2, subBab: "Pendahuluan", title: "BAB II: Mendirikan Salat Berjamaah", image: "", isCover: true,
     content: [
       { type: "heading", content: "Apa itu Salat Berjamaah?" },
       { type: "list", content: "Pengertian:", items: [
@@ -180,7 +180,7 @@ const slides = [
     ]
   },
   {
-    id: 12, bab: 2, subBab: "Dasar Hukum", title: "Dalil Tentang Salat Berjamaah", image: "images/Picture12.jpg",
+    id: 12, bab: 2, subBab: "Dasar Hukum", title: "Dalil Tentang Salat Berjamaah", image: "images/Picture10.jpg",
     content: [
       { type: "heading", content: "Surah Al-Baqarah Ayat 43" },
       { type: "arabic", content: "وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ وَارْكَعُوا مَعَ الرَّاكِعِينَ" },
@@ -191,7 +191,7 @@ const slides = [
     ]
   },
   {
-    id: 13, bab: 2, subBab: "Tata Cara", title: "Tata Cara Salat Berjamaah", image: "images/Picture13.jpg",
+    id: 13, bab: 2, subBab: "Tata Cara", title: "Tata Cara Salat Berjamaah", image: "images/Picture11.jpg",
     content: [
       { type: "list", content: "Tata Cara Sebelum Berjamaah:", items: [
         "Sebelum ke masjid, kita berwudu dan memakai pakaian yang sopan dan suci.",
@@ -204,7 +204,7 @@ const slides = [
     ]
   },
   {
-    id: 14, bab: 2, subBab: "Tata Cara", title: "Susunan Saf (Barisan Salat)", image: "images/Picture14.jpg",
+    id: 14, bab: 2, subBab: "Tata Cara", title: "Susunan Saf (Barisan Salat)", image: "images/Picture12.jpg",
     content: [
       { type: "list", content: "Aturan Barisan Salat:", items: [
         "Saf harus lurus dan rapat, tidak boleh ada yang kosong.",
@@ -217,7 +217,7 @@ const slides = [
     ]
   },
   {
-    id: 15, bab: 2, subBab: "Tata Cara", title: "Gerakan dan Bacaan", image: "images/Picture15.jpg",
+    id: 15, bab: 2, subBab: "Tata Cara", title: "Gerakan dan Bacaan", image: "images/Picture13.jpg",
     content: [
       { type: "list", content: "Pelaksanaan:", items: [
         "Imam dan makmum berniat salat dalam hati.",
@@ -230,7 +230,7 @@ const slides = [
     ]
   },
   {
-    id: 16, bab: 2, subBab: "Ketentuan Imam dan Makmum", title: "Syarat Imam dan Makmum", image: "images/Picture16.jpg",
+    id: 16, bab: 2, subBab: "Ketentuan Imam dan Makmum", title: "Syarat Imam dan Makmum", image: "images/Picture14.jpg",
     content: [
       { type: "list", content: "Syarat Imam:", items: [
         "Memenuhi syarat sah salat.",
@@ -248,7 +248,7 @@ const slides = [
     ]
   },
   {
-    id: 17, bab: 2, subBab: "Ketentuan Imam dan Makmum", title: "Dua Macam Makmum", image: "images/Picture17.jpg",
+    id: 17, bab: 2, subBab: "Ketentuan Imam dan Makmum", title: "Dua Macam Makmum", image: "images/Picture15.jpg",
     content: [
       { type: "heading", content: "1. Makmum Muwafik" },
       { type: "text", content: "Makmum yang mengikuti imam sejak awal sampai selesai. Dari awal takbir sampai salam." },
@@ -262,7 +262,7 @@ const slides = [
     ]
   },
   {
-    id: 18, bab: 2, subBab: "Adab dan Hikmah", title: "Adab dalam Salat Berjamaah", image: "images/Picture18.jpg",
+    id: 18, bab: 2, subBab: "Adab dan Hikmah", title: "Adab dalam Salat Berjamaah", image: "images/Picture16.jpg",
     content: [
       { type: "list", content: "Adab Berjamaah:", items: [
         "Menuju masjid dengan tenang, tidak tergesa-gesa.",
@@ -275,7 +275,7 @@ const slides = [
     ]
   },
   {
-    id: 19, bab: 2, subBab: "Adab dan Hikmah", title: "Hikmah dan Keutamaan Salat Berjamaah", image: "images/Picture19.jpg",
+    id: 19, bab: 2, subBab: "Adab dan Hikmah", title: "Hikmah dan Keutamaan Salat Berjamaah", image: "images/Picture17.jpg",
     content: [
       { type: "list", content: "Keutamaan:", items: [
         "Mendapat pahala besar (27 derajat lebih tinggi).",
@@ -289,7 +289,7 @@ const slides = [
     ]
   },
   {
-    id: 20, bab: 2, subBab: "Uzur Salat Berjamaah", title: "Kapan Boleh Tidak Salat Berjamaah", image: "images/Picture20.jpg",
+    id: 20, bab: 2, subBab: "Uzur Salat Berjamaah", title: "Kapan Boleh Tidak Salat Berjamaah", image: "",
     content: [
       { type: "text", content: "Ada beberapa alasan (uzur) yang membolehkan tidak salat berjemaah:" },
       { type: "list", content: "Uzur:", items: [
@@ -327,12 +327,12 @@ const quizPG = [
   { id: 1, question: "Kata salat menurut bahasa adalah…", options: ["Zakat", "Puasa", "Doa"], correctIndex: 2 },
   { id: 2, question: "Salat merupakan Ibadah yang diperintahkan oleh…", options: ["Orang tua", "Allah", "Guru"], correctIndex: 1 },
   { id: 3, question: "Orang yang menjaga salat fardhu tepat waktu bersikap…", options: ["Jujur", "Disiplin", "Kerjasama"], correctIndex: 1 },
-  { id: 4, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar duduk tahiyat akhir)", options: ["Duduk tahiyat akhir", "Sujud", "Rukuk"], correctIndex: 0 },
+  { id: 4, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar duduk tahiyat akhir)", image: "images/Picture18.jpg", options: ["Duduk tahiyat akhir", "Sujud", "Rukuk"], correctIndex: 0 },
   { id: 5, question: "Gerakan terakhir dalam ibadah salat adalah…", options: ["Salam", "Rukuk", "Sujud"], correctIndex: 0 },
   { id: 6, question: "Hukum mengerjakan salat fardhu 5 waktu adalah…", options: ["Sunah", "Wajib", "Mubah"], correctIndex: 1 },
-  { id: 7, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar takbiratul ikhram)", options: ["Takbiratul ikhram", "Sujud", "Rukuk"], correctIndex: 0 },
+  { id: 7, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar takbiratul ikhram)", image: "images/Picture19.jpg", options: ["Takbiratul ikhram", "Sujud", "Rukuk"], correctIndex: 0 },
   { id: 8, question: "Meninggalkan shalat isya' hukumnya…", options: ["Wajib", "Sunah", "Haram"], correctIndex: 2 },
-  { id: 9, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar bersedekap)", options: ["Duduk tahiyatul awal", "Salam", "Bersedekap"], correctIndex: 2 },
+  { id: 9, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar bersedekap)", image: "images/Picture20.jpg", options: ["Duduk tahiyatul awal", "Salam", "Bersedekap"], correctIndex: 2 },
   { id: 10, question: "Jika tidak mampu berdiri dapat melakukan salat dengan posisi…", options: ["Duduk", "Jongkok", "Bersandar"], correctIndex: 0 },
   
   // BAB 2

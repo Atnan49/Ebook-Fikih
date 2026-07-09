@@ -206,6 +206,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         card.appendChild(num);
         card.appendChild(text);
+        
+        if (question.image) {
+            const img = document.createElement('img');
+            img.src = question.image;
+            img.className = 'question-img';
+            img.style.maxWidth = '100%';
+            img.style.borderRadius = '0.5rem';
+            img.style.margin = '1rem auto';
+            img.style.display = 'block';
+            card.appendChild(img);
+        }
+
         card.appendChild(optionsList);
         tabPg.appendChild(card);
 
