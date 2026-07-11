@@ -610,7 +610,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const icon = document.createElement('img');
         icon.className = 'praktik-icon';
-        icon.src = "images/wudhu-illustration.webp";
+        icon.src = "images/wudhu-illustration.png";
         icon.alt = "Ilustrasi Wudhu";
 
         const title = document.createElement('h2');
