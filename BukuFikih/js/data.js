@@ -325,6 +325,10 @@ const slides = [
           "Memberatkan timbangan amal kebaikan.",
           "Membiasakan sikap disiplin dan taat."
         ]
+      },
+      {
+        "type": "video",
+        "content": "video/Praktek Sholat.mp4"
       }
     ]
   },

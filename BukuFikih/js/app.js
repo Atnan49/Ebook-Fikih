@@ -350,6 +350,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `<p class="block-translation animate-fade-in" ${delayStyle}>${block.content}</p>`;
             case 'note':
                 return `<div class="block-note animate-fade-in" ${delayStyle}>💡 ${block.content}</div>`;
+            case 'video':
+                return `
+                    <div class="block-video-container animate-fade-in" ${delayStyle} style="
+                        margin-top: 1.5rem;
+                        background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 100%);
+                        border: 2px solid rgba(91, 155, 213, 0.3);
+                        border-radius: var(--radius-2xl);
+                        padding: 1.25rem;
+                        box-shadow: var(--shadow-card);
+                    ">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <span style="font-weight: 700; color: var(--color-blue-800); font-size: 0.85em; letter-spacing: 0.5px; text-transform: uppercase;">
+                                Video Praktik Gerakan Salat
+                            </span>
+                        </div>
+                        <div style="position: relative; width: 100%; border-radius: var(--radius-xl); overflow: hidden; background: #000; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+                            <video controls class="block-video" style="display: block; width: 100%; height: auto; max-height: 400px; aspect-ratio: 16/9; object-fit: contain;">
+                                <source src="${block.content}" type="video/mp4">
+                                Browser Anda tidak mendukung tag video.
+                            </video>
+                        </div>
+                    </div>
+                `;
             case 'list':
                 let listHTML = `<div class="block-list-container animate-fade-in" ${delayStyle}>`;
                 if (block.content) {
@@ -609,6 +632,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
                         }
                     });
+                    break;
+                case 'video':
+                    // Skip speaking video blocks
                     break;
                 default:
                     segments.push({
