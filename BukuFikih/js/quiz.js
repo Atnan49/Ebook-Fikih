@@ -610,8 +610,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const icon = document.createElement('img');
         icon.className = 'praktik-icon';
-        icon.src = "images/wudhu-illustration.png";
-        icon.alt = "Ilustrasi Wudhu";
+        icon.src = "images/shalat-illustration.png";
+        icon.alt = "Ilustrasi Salat";
 
         const title = document.createElement('h2');
         title.className = 'praktik-title';
