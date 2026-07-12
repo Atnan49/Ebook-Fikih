@@ -1,9 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/BukuFikih/index.html",
-      "permanent": false
-    }
-  ]
+  "cleanUrls": true,
+  "outputDirectory": "."
 }
