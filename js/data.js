@@ -171,36 +171,47 @@ const slides = [
     "bab": 1,
     "subBab": "Ketentuan Shalat Fardhu",
     "title": "Rukun Salat",
-    "image": "images/Picture4.webp",
+    "image": "",
     "content": [
       {
         "type": "text",
         "content": "Gerakan dan bacaan yang wajib dikerjakan."
       },
       {
-        "type": "list",
-        "content": "Rukun Salat (a-g):",
-        "items": [
-          "Niat. Dilakukan dalam hati, dibaca bersamaan dengan takbiratulihram.",
-          "Berdiri Tegak Menghadap Kiblat. (Jika mampu)",
-          "Takbiratulihram. Mengucap Allahu Akbar.",
-          "Bersedekap. Tangan kanan di atas tangan kiri.",
-          "Membaca Doa Iftitah.",
-          "Membaca Surah Al-Fatihah. Wajib dibaca setiap rakaat.",
-          "Membaca Ayat Al-Qur'an. Setelah Al-Fatihah, sunah."
-        ]
+        "type": "image",
+        "content": "images/rukun_salat_1.webp"
       },
       {
         "type": "list",
-        "content": "Rukun Salat (h-n):",
+        "content": "Rukun Salat (a-f):",
+        "badgeType": "alphabet",
+        "start": 0,
         "items": [
+          "Niat. Dilakukan dalam hati, untuk mendapatkan rida Allah Swt.",
+          "Berdiri Tegak Menghadap Kiblat. (Jika mampu)",
+          "Takbiratulihram. Mengucap Allahu Akbar, sambil mengangkat tangan sejajar bahu.",
+          "Membaca Surah Al-Fatihah. Wajib dibaca setiap rakaat.",
           "Rukuk dengan Tumakninah.",
-          "Iktidal dengan Tumakninah.",
+          "Iktidal dengan Tumakninah."
+        ]
+      },
+      {
+        "type": "image",
+        "content": "images/rukun_salat_2.webp"
+      },
+      {
+        "type": "list",
+        "content": "Rukun Salat (g-m):",
+        "badgeType": "alphabet",
+        "start": 6,
+        "items": [
           "Sujud dengan Tumakninah, dua kali.",
-          "Duduk di antara Dua Sujud, Duduk Iftirasy.",
-          "Duduk Tasyahud Akhir dan Membaca Tasyahud.",
-          "Salam. Salat diakhiri dengan salam.",
-          "Tertib. Semua gerakan dan bacaan berurutan."
+          "Duduk di antara Dua Sujud.",
+          "Duduk Tahiyat Akhir.",
+          "Membaca Tahiyat Akhir.",
+          "Membaca Salawat Nabi Muhammad pada tahiyat akhir.",
+          "Membaca Salam.",
+          "Tertib, berurutan."
         ]
       }
     ]
@@ -210,7 +221,7 @@ const slides = [
     "bab": 1,
     "subBab": "Ketentuan Shalat Fardhu",
     "title": "Sunah Kauli dan Fikli",
-    "image": "images/Picture5.webp",
+    "image": "images/iftirasy_new.webp",
     "content": [
       {
         "type": "list",
@@ -228,7 +239,7 @@ const slides = [
         "type": "list",
         "content": "B. Sunah Fikli (Gerakan):",
         "items": [
-          "Mengangkat tangan saat takbiratulihram and takbir intiqal.",
+          "Mengangkat tangan saat takbiratulihram dan takbir intiqal.",
           "Bersedekap.",
           "Meletakkan tangan di paha saat duduk.",
           "Duduk iftirasy dan duduk tawaruk.",
@@ -279,7 +290,7 @@ const slides = [
     "bab": 1,
     "subBab": "Waktu dan bilangan",
     "title": "Salat Fardu",
-    "image": "images/Picture7.webp",
+    "image": "images/salat_fardu_landscape.webp",
     "content": [
       {
         "type": "text",
@@ -320,10 +331,15 @@ const slides = [
           "Menunjukkan rasa syukur kepada Allah Swt.",
           "Membuat hati tenteram dan tenang.",
           "Gerakan salat menyehatkan badan.",
-          "Mendapat rahmat Allah Swt.",
+          "Melindungi dari siksa kubur.",
           "Doa lebih mudah dikabulkan.",
           "Memberatkan timbangan amal kebaikan.",
-          "Membiasakan sikap disiplin dan taat."
+          "Mendapat rahmat Allah Swt.",
+          "Mendapat rida dari Allah Swt.",
+          "Mendapat balasan surga.",
+          "Menghalangi siksa neraka.",
+          "Terhindar dari perbuatan keji dan mungkar.",
+          "Membiasakan sikap disiplin."
         ]
       },
       {
@@ -367,10 +383,13 @@ const slides = [
         "items": [
           "Salat berjemaah adalah salat yang dikerjakan bersama-sama.",
           "Salat berjemaah ada imam dan makmum.",
-          "Imam memimpin salat di depan. Makmum mengikuti imam di belakang.",
+          "Imam memimpin salat di depan.",
+          "Makmum mengikuti imam di belakang.",
           "Salat sendiri disebut salat munfarid.",
-          "Salat berjemaah lebih utama daripada salat sendiri. Pahalanya 27 derajat lebih tinggi.",
-          "Hukumnya sunah muakadah (sangat dianjurkan)."
+          "Salat berjemaah lebih utama daripada salat sendiri.",
+          "Pahala salat berjamaah 27 derajat lebih tinggi.",
+          "Salat berjemaah hukumnya sunah muakadah (sangat dianjurkan).",
+          "Nabi Muhammad saw selalu salat berjamaah bahkan saat sakit."
         ]
       }
     ]
@@ -472,8 +491,10 @@ const slides = [
         "items": [
           "Imam dan makmum berniat salat dalam hati.",
           "Imam mengucap takbiratulihram, makmum mengikuti.",
+          "Bacaan dan gerakan salat berjamaah sama seperti salat biasa.",
           "Pada salat Subuh, Magrib, dan Isya, imam membaca surah dengan suara keras (jahar).",
           "Pada salat Zuhur dan Asar, imam membaca dengan suara pelan (sirr).",
+          "Makmum mengikuti setiap gerakan imam.",
           "Jika imam lupa, makmum mengingatkan. Makmum laki-laki membaca Subhanallah. Perempuan menepuk tangan.",
           "Jika ada makmum yang datang terlambat (masbuk), ia tetap ikut salat. Setelah imam salam, ia menambah rakaat yang tertinggal."
         ]
@@ -495,15 +516,18 @@ const slides = [
           "Fasih dan paham bacaan Al-Qur'an.",
           "Berpengetahuan luas tentang Islam.",
           "Laki-laki. Perempuan hanya untuk sesama perempuan.",
-          "Berniat menjadi imam & Dapat dilihat oleh makmum."
+          "Berniat menjadi imam.",
+          "Dapat dilihat oleh makmum."
         ]
       },
       {
         "type": "list",
         "content": "Syarat Makmum:",
         "items": [
-          "Berniat mengikuti imam & Mengikuti setiap gerakan imam.",
-          "Berada di tempat yang sama dengan imam & Berdiri di belakang imam.",
+          "Berniat mengikuti imam.",
+          "Mengikuti setiap gerakan imam.",
+          "Berada di tempat yang sama dengan imam.",
+          "Berdiri di belakang imam.",
           "Laki-laki tidak boleh menjadi makmum dari imam perempuan.",
           "Tidak mendahului gerakan imam."
         ]
@@ -556,7 +580,8 @@ const slides = [
         "content": "Adab Berjamaah:",
         "items": [
           "Menuju masjid dengan tenang, tidak tergesa-gesa.",
-          "Segera mengisi saf yang masih kosong, merapatkan dan meluruskan saf.",
+          "Segera mengisi saf yang masih kosong.",
+          "Rapatkan dan meluruskan saf.",
           "Tidak berdiri di antara tiang-tiang masjid, karena membuat saf terputus.",
           "Membenarkan bacaan imam jika salah, dengan mengucap Subhanallah.",
           "Hanya mengucapkan bacaan salat, tidak berbicara atau bermain.",
@@ -580,9 +605,13 @@ const slides = [
           "Mempersatukan umat Islam.",
           "Mensyukuri nikmat Allah.",
           "Syiar Islam dan memakmurkan masjid.",
-          "Melatih kedisiplinan dan mempererat silaturahmi.",
+          "Melatih kedisiplinan.",
+          "Mempererat silaturahmi.",
           "Mengajarkan menghargai perbedaan.",
-          "Menumbuhkan rasa tanggung jawab sosial."
+          "Menumbuhkan rasa tanggung jawab sosial.",
+          "Membiasakan saling mengingatkan.",
+          "Melatih kesabaran dan menghargai waktu.",
+          "Melatih menjadi pemimpin dan menjadi orang yang dipimpin."
         ]
       }
     ]

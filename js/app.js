@@ -350,6 +350,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `<p class="block-translation animate-fade-in" ${delayStyle}>${block.content}</p>`;
             case 'note':
                 return `<div class="block-note animate-fade-in" ${delayStyle}>💡 ${block.content}</div>`;
+            case 'image':
+                return `
+                    <div class="slide-image-wrapper animate-fade-in-up" ${delayStyle}>
+                        <img src="${block.content}" class="slide-img" />
+                    </div>
+                `;
             case 'video':
                 return `
                     <div class="block-video-container animate-fade-in" ${delayStyle} style="
@@ -380,9 +386,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 listHTML += `<ul class="block-list">`;
                 block.items.forEach((item, i) => {
+                    const badgeVal = block.badgeType === 'alphabet'
+                        ? String.fromCharCode(97 + (block.start || 0) + i)
+                        : ((block.start || 1) + i);
                     listHTML += `
                         <li class="block-list-item">
-                            <span class="list-badge">${i + 1}</span>
+                            <span class="list-badge">${badgeVal}</span>
                             <span>${item}</span>
                         </li>
                     `;
@@ -460,19 +469,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const cleanText = text
             // Hapus tag HTML agar tidak dibaca oleh TTS
             .replace(/<[^>]*>/g, '')
-            // Hapus Arabic chars dulu (fix bug slide 22)
-            .replace(/[\u0600-\u06FF\u0750-\u077F]+/g, '')
+            // Hapus karakter Arab Unicode
+            .replace(/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]+/g, '')
             .replace(/\s*—\s*/g, '. ')
-            // Expand H.R. references
-            .replace(/H\.R\.\s*/gi, 'Hadis Riwayat ')
+            // Hapus rentang huruf slide seperti (a-f), (g-m)
+            .replace(/\s*\([a-z]-[a-z]\)/gi, '')
+            // Ubah simbol ke teks pelafalan bahasa Indonesia
+            .replace(/&/g, ' dan ')
+            .replace(/=/g, ' adalah ')
+            // Expand H.R. references (Hadis Riwayat)
+            .replace(/\bH\.?R\.?\b/gi, 'Hadis Riwayat')
             .replace(/Hadist\s/gi, 'Hadis ')
             .replace(/Muttafaqun\s*Alaihi/gi, 'Bukhari dan Muslim')
-            // Expand QS. references
-            .replace(/Q\.?S\.\s*/gi, 'Quran Surah ')
+            // Expand QS. references (Quran Surah)
+            .replace(/\bQ\.?S\.?\b/gi, 'Quran Surah')
             // Expand singkatan Islami
             .replace(/\bSAW\.?\b/gi, 'shallallahu alaihi wasallam')
             .replace(/\bSWT\.?\b/gi, 'subhanahu wataala')
-            .replace(/\bRA\.?\b/gi, 'radhiyallahu anhu');
+            .replace(/\bRA\.?\b/gi, 'radhiyallahu anhu')
+            // Hapus tanda petik ganda/tunggal agar pelafalan lancar
+            .replace(/["']/g, '')
+            // Ganti tanda kurung biasa dengan spasi agar jeda baca alami
+            .replace(/[\(\)]/g, ' ');
 
         // ponytail: use existing stripDiacritics helper to clean transliterations
         return stripDiacritics(cleanText)
@@ -607,7 +625,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             lang: 'id-ID'
                         });
                     }
-                    (block.items || []).forEach(item => {
+                    (block.items || []).forEach((item, i) => {
+                        const badgeVal = block.badgeType === 'alphabet'
+                            ? String.fromCharCode(97 + (block.start || 0) + i)
+                            : ((block.start || 1) + i);
+                        const prefix = `${badgeVal}, `;
+
                         if (item.includes('lafaz-arabic')) {
                             const arMatch = item.match(/class=["']lafaz-arabic["'][^>]*>([^<]+)<\/span>/);
                             const latMatch = item.match(/class=["']lafaz-latin["'][^>]*>([^<]+)<\/span>/);
@@ -627,14 +650,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         } else {
                             segments.push({
                                 type: 'text',
-                                text: normalizeIslamicText(item),
+                                text: prefix + normalizeIslamicText(item),
                                 lang: 'id-ID'
                             });
                         }
                     });
                     break;
                 case 'video':
-                    // Skip speaking video blocks
+                case 'image':
+                    // Skip speaking video and image blocks
                     break;
                 default:
                     segments.push({
