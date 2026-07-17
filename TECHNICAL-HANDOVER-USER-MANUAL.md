@@ -16,7 +16,7 @@ Aplikasi **Smart E-Book Digital Fikih Kelas 2 SD Semester 1** dirancang sebagai 
 ### 2. Teknologi Utama (Tech Stack)
 1. **Struktur Konten**: HTML5 Semantik untuk memastikan aksesibilitas pembaca layar (screen readers).
 2. **Desain & Gaya**: 
-   - CSS3 murni dengan variabel CSS ([css/common.css](file:///d:/Projek-web/Ebook/BukuFikih/css/common.css)) untuk kustomisasi tema terpusat.
+   - CSS3 murni dengan variabel CSS ([css/common.css](file:///d:/Projek-web/Ebook/css/common.css)) untuk kustomisasi tema terpusat.
    - Layout modern berbasis Flexbox dan Grid.
    - Efek visual Glassmorphism (`backdrop-filter`) untuk antarmuka yang premium.
    - Animasi CSS `@keyframes` yang halus untuk transisi slide.
@@ -32,7 +32,7 @@ Aplikasi **Smart E-Book Digital Fikih Kelas 2 SD Semester 1** dirancang sebagai 
 Berikut adalah struktur berkas dalam repositori dan pembagian tanggung jawab modul:
 
 ```text
-BukuFikih/
+.
 ├── index.html                          # Landing Page utama (Developer: Rifki)
 ├── ebook.html                          # Viewer E-Book Flipbook (Developer: Atnan)
 ├── kuis.html                           # Halaman Kuis 3 Tab (Developer: Narendra)
@@ -72,7 +72,7 @@ Fitur UDL dirancang untuk memberikan alternatif representasi informasi bagi sisw
 - **Persistensi**: Disimpan dalam `localStorage` (`fontScale`).
 
 #### C. Smart Text-to-Speech (TTS) Engine
-Logika TTS pada [js/app.js](file:///d:/Projek-web/Ebook/BukuFikih/js/app.js) memiliki kompleksitas khusus untuk menangani penggabungan bahasa Indonesia dan Arab:
+Logika TTS pada [js/app.js](file:///d:/Projek-web/Ebook/js/app.js) memiliki kompleksitas khusus untuk menangani penggabungan bahasa Indonesia dan Arab:
 1. **Segmentasi Konten**: Slide dipecah menjadi beberapa segmen pembacaan (Intro slide, heading, teks utama, lafaz Arab, transliterasi, terjemahan).
 2. **Audio Murattal Al-Qur'an & Hadis**:
    - Jika suatu blok materi memiliki properti `audio` lokal (misalnya `audio/quran_2_43.mp3`), sistem langsung memutar berkas lokal tersebut.
@@ -83,7 +83,7 @@ Logika TTS pada [js/app.js](file:///d:/Projek-web/Ebook/BukuFikih/js/app.js) mem
 ---
 
 ### 5. Detail Modul Kuis Interaktif
-Diimplementasikan dalam [js/quiz.js](file:///d:/Projek-web/Ebook/BukuFikih/js/quiz.js):
+Diimplementasikan dalam [js/quiz.js](file:///d:/Projek-web/Ebook/js/quiz.js):
 - **Sistem Navigasi Grid Soal**: Kuis Pilihan Ganda (PG) dan Essay menampilkan nomor soal yang dikelompokkan berdasarkan bab pelajaran secara visual (Bab 1: Salat Fardhu, Bab 2: Mendirikan Salat Berjamaah). Siswa dapat melompat antar soal menggunakan tombol navigasi grid atau tombol pagination ("Sebelumnya" / "Berikutnya").
 - **Sticky Footer Navigation**: Menampilkan panel kontrol navigasi tetap (sticky) di bagian bawah layar saat mengerjakan kuis agar ramah terhadap layar gawai (mobile) anak-anak.
 - **Tab Pilihan Ganda**: Merender 21 soal dari bank soal secara dinamis. Mendukung visual state aktif `.selected`, koreksi visual instan `.correct` (hijau) dan `.wrong` (merah) setelah pengiriman, serta kalkulasi nilai akhir instan dengan feedback emoji apresiatif (🌟 untuk nilai 100, 👏 untuk nilai >= 70, 💪 untuk nilai < 70).
@@ -94,10 +94,10 @@ Diimplementasikan dalam [js/quiz.js](file:///d:/Projek-web/Ebook/BukuFikih/js/qu
 
 ### 6. Panduan Pemeliharaan & Kustomisasi Konten (Developer Guide)
 
-Seluruh konfigurasi konten berada di [js/data.js](file:///d:/Projek-web/Ebook/BukuFikih/js/data.js). Anda tidak perlu mengubah berkas HTML atau logika JS utama untuk menambah/mengubah materi.
+Seluruh konfigurasi konten berada di [js/data.js](file:///d:/Projek-web/Ebook/js/data.js). Anda tidak perlu mengubah berkas HTML atau logika JS utama untuk menambah/mengubah materi.
 
 #### A. Menambahkan Slide E-Book Baru
-Tambahkan objek slide baru di dalam array `slides` di [js/data.js](file:///d:/Projek-web/Ebook/BukuFikih/js/data.js):
+Tambahkan objek slide baru di dalam array `slides` di [js/data.js](file:///d:/Projek-web/Ebook/js/data.js):
 
 ```javascript
 {
@@ -126,7 +126,7 @@ Tambahkan objek slide baru di dalam array `slides` di [js/data.js](file:///d:/Pr
 ```
 
 #### B. Mengubah Soal Kuis Pilihan Ganda (PG)
-Ubah array `quizPG` pada [js/data.js](file:///d:/Projek-web/Ebook/BukuFikih/js/data.js):
+Ubah array `quizPG` pada [js/data.js](file:///d:/Projek-web/Ebook/js/data.js):
 ```javascript
 {
   id: 1,
@@ -138,7 +138,7 @@ Ubah array `quizPG` pada [js/data.js](file:///d:/Projek-web/Ebook/BukuFikih/js/d
 ```
 
 #### C. Mengubah Kontak WhatsApp Pengumpulan Tugas Praktik
-Cari objek `praktikInfo` di bagian paling bawah [js/data.js](file:///d:/Projek-web/Ebook/BukuFikih/js/data.js):
+Cari objek `praktikInfo` di bagian paling bawah [js/data.js](file:///d:/Projek-web/Ebook/js/data.js):
 ```javascript
 const praktikInfo = {
   title: "Praktik Salat Fardhu",
