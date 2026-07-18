@@ -678,12 +678,12 @@ const quizPG = [
   { id: 1, bab: 1, question: "Kata salat menurut bahasa adalah…", options: ["Zakat", "Puasa", "Doa"], correctIndex: 2 },
   { id: 2, bab: 1, question: "Salat merupakan Ibadah yang diperintahkan oleh…", options: ["Orang tua", "Allah", "Guru"], correctIndex: 1 },
   { id: 3, bab: 1, question: "Orang yang menjaga salat fardhu tepat waktu bersikap…", options: ["Jujur", "Disiplin", "Kerjasama"], correctIndex: 1 },
-  { id: 4, bab: 1, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar duduk tahiyat akhir)", image: "images/Picture18.webp", options: ["Duduk tahiyat akhir", "Sujud", "Rukuk"], correctIndex: 0 },
+  { id: 4, bab: 1, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut?", image: "images/Picture18.webp", options: ["Duduk tahiyat akhir", "Sujud", "Rukuk"], correctIndex: 1 }, // ponytail: correctIndex 1 (sujud) & removed parenthetical hint
   { id: 5, bab: 1, question: "Gerakan terakhir dalam ibadah salat adalah…", options: ["Salam", "Rukuk", "Sujud"], correctIndex: 0 },
   { id: 6, bab: 1, question: "Hukum mengerjakan salat fardhu 5 waktu adalah…", options: ["Sunah", "Wajib", "Mubah"], correctIndex: 1 },
-  { id: 7, bab: 1, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar takbiratul ikhram)", image: "images/Picture19.webp", options: ["Takbiratul ikhram", "Sujud", "Rukuk"], correctIndex: 0 },
+  { id: 7, bab: 1, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut?", image: "images/Picture19.webp", options: ["Takbiratul ikhram", "Sujud", "Rukuk"], correctIndex: 2 }, // ponytail: correctIndex 2 (rukuk) & removed parenthetical hint
   { id: 8, bab: 1, question: "Meninggalkan shalat isya' hukumnya…", options: ["Wajib", "Sunah", "Haram"], correctIndex: 2 },
-  { id: 9, bab: 1, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut? (Berdasarkan gambar bersedekap)", image: "images/Picture20.webp", options: ["Duduk tahiyatul awal", "Salam", "Bersedekap"], correctIndex: 2 },
+  { id: 9, bab: 1, question: "Gerakan apa yang sedang dilakukan laki-laki tersebut?", image: "images/Picture20.webp", options: ["Duduk tahiyatul awal", "Salam", "Bersedekap"], correctIndex: 2 }, // ponytail: removed parenthetical hint per user request
   { id: 10, bab: 1, question: "Jika tidak mampu berdiri dapat melakukan salat dengan posisi…", options: ["Duduk", "Jongkok", "Bersandar"], correctIndex: 0 },
   
   // BAB 2 — Salat Berjamaah
