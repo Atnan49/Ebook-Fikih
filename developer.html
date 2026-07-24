@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Web & Pengembang - Smart E-Book Fikih</title>
+    <!-- Google Fonts: Inter & Amiri -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Link CSS Utama -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        .dev-container {
+            max-width: 800px;
+            margin: 2rem auto 4rem;
+            padding: 0 1rem;
+        }
+
+        .nav-back-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .dev-card {
+            padding: 2rem;
+            border-radius: var(--radius-2xl);
+            margin-bottom: 2rem;
+        }
+
+        .dev-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-blue-500), var(--color-blue-700));
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(37, 99, 160, 0.25);
+        }
+
+        .dev-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--color-blue-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .dev-subtitle {
+            font-size: 1rem;
+            color: var(--color-blue-700);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .dev-section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-blue-800);
+            margin: 1.5rem 0 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .dev-text {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .dev-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .dev-profile-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--color-blue-200);
+            border-radius: var(--radius-xl);
+            padding: 1.25rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dev-profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+            border-color: var(--color-blue-400);
+        }
+
+        .dev-avatar-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--color-blue-100), var(--color-blue-200));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto 0.85rem;
+            color: var(--color-blue-600);
+        }
+
+        .dev-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--color-blue-900);
+            margin-bottom: 0.25rem;
+        }
+
+        .dev-role {
+            font-size: 0.85rem;
+            color: var(--color-blue-600);
+            font-weight: 600;
+        }
+
+        .tech-tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: var(--color-blue-50);
+            color: var(--color-blue-700);
+            border: 1px solid var(--color-blue-200);
+            padding: 0.35rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ponytail: simple clean dev page layout */
+    </style>
+</head>
+
+<body class="bg-pattern landing-body">
+
+    <main class="dev-container">
+        <!-- Navigation Header -->
+        <div class="nav-back-header animate-fade-in">
+            <a href="index.html" class="back-link">
+                <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+                Kembali ke Beranda
+            </a>
+            <span class="top-badge">Informasi Web & Pengembang</span>
+        </div>
+
+        <!-- Main Card: About Project -->
+        <article class="dev-card glass-card-strong animate-fade-in-up">
+            <span class="dev-badge">Smart E-Book Digital Fikih</span>
+            <h1 class="dev-title">Tentang Aplikasi</h1>
+            <p class="dev-subtitle">
+                Media pembelajaran interaktif Fikih berbasis <strong>Universal Design for Learning (UDL)</strong> untuk siswa Kelas 2 SD.
+            </p>
+            
+            <p class="dev-text">
+                Web e-book ini dirancang khusus untuk menciptakan pengalaman belajar Fikih yang inklusif, menyenangkan, dan mudah diakses oleh seluruh siswa dengan berbagai latar belakang gaya belajar. Menggabungkan materi visual, audio bacaan salat, kuis interaktif, serta fitur aksesibilitas seperti mode disleksia dan penyesuaian ukuran teks.
+            </p>
+
+            <div class="dev-section-title">
+                Peneliti / Penulis Utama
+            </div>
+            <p class="dev-text">
+                <strong>Diya Fauziyah</strong> — Universitas Darussalam Gontor (UNIDA)
+            </p>
+
+            <div class="tech-tag-container">
+                <span class="tech-tag">Universal Design for Learning (UDL)</span>
+                <span class="tech-tag">Flipbook Interaktif</span>
+                <span class="tech-tag">Audio Bacaan Salat</span>
+                <span class="tech-tag">Kuis Interaktif</span>
+                <span class="tech-tag">Dyslexia Friendly</span>
+            </div>
+        </article>
+
+        <!-- Developer Card -->
+        <article class="dev-card glass-card-strong animate-fade-in-up" style="animation-delay: 0.15s;">
+            <span class="dev-badge" style="background: linear-gradient(135deg, var(--color-gold-500), #B8860B);">Web Developer Team</span>
+            <h2 class="dev-title">Developed by atnan49 & Seraphic.std</h2>
+            <p class="dev-subtitle">
+                Dikembangkan dan dibangun secara profesional oleh tim pengembang web <strong>atnan49</strong> & <strong>Seraphic.std</strong>.
+            </p>
+
+            <p class="dev-text">
+                Aplikasi web ini mengintegrasikan standar web modern, performa tinggi, desain antarmuka *Glassmorphism* yang bersih, serta kesesuaian aksesibilitas UDL penuh.
+            </p>
+
+            <div class="dev-grid">
+                <a href="https://github.com/Atnan49/" target="_blank" rel="noopener noreferrer" class="dev-profile-card" style="text-decoration: none;">
+                    <div class="dev-avatar-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </div>
+                    <div class="dev-name">atnan49</div>
+                    <div class="dev-role">Lead Web Developer & Architecture</div>
+                    <div style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--color-blue-600); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                        GitHub Profile ↗
+                    </div>
+                </a>
+                <a href="https://seraphic-std-five.vercel.app/" target="_blank" rel="noopener noreferrer" class="dev-profile-card" style="text-decoration: none;">
+                    <div class="dev-avatar-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+                            <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+                            <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+                            <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+                            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.72 1.7-1.65 0-.43-.17-.83-.46-1.13-.29-.3-.46-.7-.46-1.13 0-.92.77-1.67 1.7-1.67h2.52c2.76 0 5.02-2.25 5.02-5C22 6.5 17.5 2 12 2z"/>
+                        </svg>
+                    </div>
+                    <div class="dev-name">Seraphic.std</div>
+                    <div class="dev-role">UI/UX Design & Frontend Development</div>
+                    <div style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--color-blue-600); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                        Website Portfolio ↗
+                    </div>
+                </a>
+            </div>
+
+            <div style="margin-top: 1.75rem; text-align: center;">
+                <p style="font-size: 0.85rem; color: var(--color-blue-600); font-weight: 600;">
+                    Tech Stack: HTML5 • CSS3 Glassmorphism • JS ES6+ • Responsive PWA Ready
+                </p>
+            </div>
+        </article>
+
+        <!-- Footer -->
+        <div class="ebook-footer animate-fade-in-up" style="animation-delay: 0.25s; margin-top: 2rem;">
+            <div class="ebook-footer-card glass-card-strong" style="text-align: center;">
+                <p class="ebook-footer-quote">"Belajar adalah ibadah, Ilmu adalah Cahaya, dan Kesungguhan adalah Kuncinya"</p>
+                <div class="ebook-footer-divider"></div>
+                <p class="ebook-footer-copyright">&copy; 2026 Smart E-Book Digital Fikih — Diya Fauziyah / UNIDA</p>
+                <p class="ebook-footer-developer" style="font-size: 0.85rem; color: var(--color-blue-600); font-weight: 600; margin-top: 0.35rem;">
+                    Developed by atnan49 & Seraphic.std
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedDyslexia = localStorage.getItem('dyslexiaMode');
+            if (savedDyslexia === 'true') {
+                document.body.classList.add('dyslexia-mode');
+            }
+        });
+    </script>
+</body>
+
+</html>

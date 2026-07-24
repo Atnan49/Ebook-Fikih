@@ -1,0 +1,22 @@
+{
+  "name": "Smart E-Book Digital Fikih",
+  "short_name": "E-Book Fikih",
+  "description": "Smart E-Book Digital Fikih Kelas 2 SD Berbasis Universal Design for Learning (UDL)",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FFFDF7",
+  "theme_color": "#3B82C4",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./public/images/muslim_children_reading.webp",
+      "sizes": "192x192",
+      "type": "image/webp"
+    },
+    {
+      "src": "./public/images/muslim_children_reading.webp",
+      "sizes": "512x512",
+      "type": "image/webp"
+    }
+  ]
+}
