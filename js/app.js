@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 coverHTML += `
                     <div class="slide-image-wrapper animate-fade-in-up" style="animation-delay: 0.1s; margin-bottom: 1.25rem;">
                         <div class="relative-wrap">
-                            <img src="${slide.image}" alt="${slide.title}" class="slide-img" />
+                            <img src="${slide.image}" alt="${slide.title}" class="slide-img" loading="lazy" decoding="async" />
                         </div>
                     </div>
                 `;
@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (slide.image) {
                 slideHTML += `
                     <div class="slide-image-wrapper animate-fade-in-up" style="animation-delay: 0.1s;">
-                        <img src="${slide.image}" alt="${slide.title}" class="slide-img" />
+                        <img src="${slide.image}" alt="${slide.title}" class="slide-img" loading="lazy" decoding="async" />
                     </div>
                 `;
             }
@@ -353,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'image':
                 return `
                     <div class="slide-image-wrapper animate-fade-in-up" ${delayStyle}>
-                        <img src="${block.content}" class="slide-img" />
+                        <img src="${block.content}" class="slide-img" loading="lazy" decoding="async" />
                     </div>
                 `;
             case 'video':
@@ -372,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             </span>
                         </div>
                         <div style="position: relative; width: 100%; border-radius: var(--radius-xl); overflow: hidden; background: #000; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
-                            <video controls class="block-video" style="display: block; width: 100%; height: auto; max-height: 400px; aspect-ratio: 16/9; object-fit: contain;">
+                            <video controls preload="metadata" class="block-video" style="display: block; width: 100%; height: auto; max-height: 400px; aspect-ratio: 16/9; object-fit: contain;">
                                 <source src="${block.content}" type="video/mp4">
                                 Browser Anda tidak mendukung tag video.
                             </video>
