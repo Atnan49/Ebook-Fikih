@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ebook-fikih.vercel.app/sitemap.xml
+Sitemap: https://www.fiqihdigital.my.id/sitemap.xml
